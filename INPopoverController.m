@@ -98,6 +98,7 @@
 
 - (IBAction)closePopover:(id)sender
 {
+    if (![_popoverWindow isVisible]) { return; }
     BOOL close = YES;
     // Check to see if the delegate has implemented the -popoverShouldClose: method
     if ([self.delegate respondsToSelector:@selector(popoverShouldClose:)]) {
@@ -108,6 +109,7 @@
 
 - (IBAction)forceClosePopover:(id)sender
 {
+    if (![_popoverWindow isVisible]) { return; }
     [self _callDelegateMethod:@selector(popoverWillClose:)]; // Call delegate
     if (self.animates) {
         [[_popoverWindow animator] setAlphaValue:0.0];

@@ -105,7 +105,7 @@
 		<string>IDEWorkspaceTabController_A18A77FC-8A5B-4569-99A4-B0299BB0316B</string>
 		<string>IDEWorkspaceWindowControllerUniqueIdentifier</string>
 		<string>IDEActiveWorkspaceTabController</string>
-		<string>{{81, 50}, {1400, 476}}</string>
+		<string>{{-24, 77}, {1452, 801}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -475,7 +475,7 @@
 		<string>DVTIdentifier</string>
 		<string>DVTViewMagnitude</string>
 		<string>VariablesView</string>
-		<real>298</real>
+		<real>316</real>
 		<dict>
 			<key>$classes</key>
 			<array>
@@ -515,7 +515,7 @@
 			</array>
 		</dict>
 		<string>ConsoleArea</string>
-		<real>581</real>
+		<real>615</real>
 		<dict>
 			<key>$classes</key>
 			<array>
@@ -594,7 +594,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>298</real>
+		<real>316</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -624,7 +624,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>581</real>
+		<real>615</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -1041,8 +1041,8 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>320867235.17689502</real>
-		<string>{1346, 1116}</string>
+		<real>320869095.56154901</real>
+		<string>{4929, 1925}</string>
 		<string>{3751, 0}</string>
 		<string>@interface INPopoverController</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
@@ -1087,7 +1087,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {880, 378}}</string>
+		<string>{{0, 0}, {932, 703}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -1477,7 +1477,7 @@
 			</array>
 		</dict>
 		<string></string>
-		<real>154</real>
+		<real>479</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -1783,7 +1783,7 @@
 		<string>IDESCMStatusFilteringEnabled</string>
 		<string>IDESelectedObjects</string>
 		<string>IDEExpandedItemsSet</string>
-		<string>{{0, 0}, {259, 334}}</string>
+		<string>{{0, 0}, {259, 659}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2026,7 +2026,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>880</real>
+		<real>932</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5972,8 +5972,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>320866360.59848899</real>
-		<string>{12894, 2002}</string>
+		<real>320869090.72201502</real>
+		<string>{3472, 2511}</string>
 		<string>{14463, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -6068,8 +6068,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>320865772.12978899</real>
-		<string>{1528, 1288}</string>
+		<real>320869042.04521501</real>
+		<string>{1528, 731}</string>
 		<string>{1972, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -6164,8 +6164,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>320867235.17619097</real>
-		<string>{1346, 1116}</string>
+		<real>320869095.56090403</real>
+		<string>{4929, 1925}</string>
 		<string>{3751, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -6681,7 +6681,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>588</integer>
+					<integer>589</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -6728,7 +6728,7 @@
 				<integer>578</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/PopoverSampleApp-Info.plist</string>
+		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/INPopoverController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6746,7 +6746,7 @@
 				<integer>580</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/en.lproj/InfoPlist.strings</string>
+		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/INPopoverWindow.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6764,7 +6764,7 @@
 				<integer>582</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/INPopoverController.m</string>
+		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/PopoverSampleApp-Info.plist</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6782,7 +6782,7 @@
 				<integer>584</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/PopoverSampleAppAppDelegate.m</string>
+		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/en.lproj/InfoPlist.strings</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6798,6 +6798,24 @@
 			<dict>
 				<key>CF$UID</key>
 				<integer>586</integer>
+			</dict>
+		</dict>
+		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/PopoverSampleAppAppDelegate.m</string>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>116</integer>
+			</dict>
+			<key>NS.base</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>0</integer>
+			</dict>
+			<key>NS.relative</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>588</integer>
 			</dict>
 		</dict>
 		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/INPopoverWindowFrame.m</string>
@@ -6832,7 +6850,7 @@
 			<key>NS.relative</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>589</integer>
+				<integer>591</integer>
 			</dict>
 		</dict>
 		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/ContentViewController.m</string>
@@ -6850,28 +6868,10 @@
 			<key>NS.relative</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>591</integer>
-			</dict>
-		</dict>
-		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/PopoverSampleAppAppDelegate.h</string>
-		<dict>
-			<key>$class</key>
-			<dict>
-				<key>CF$UID</key>
-				<integer>116</integer>
-			</dict>
-			<key>NS.base</key>
-			<dict>
-				<key>CF$UID</key>
-				<integer>0</integer>
-			</dict>
-			<key>NS.relative</key>
-			<dict>
-				<key>CF$UID</key>
 				<integer>593</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/ContentViewController.h</string>
+		<string>file://localhost/Users/Indragie/Desktop/INPopoverController/PopoverSampleApp/PopoverSampleApp/PopoverSampleAppAppDelegate.h</string>
 	</array>
 	<key>$top</key>
 	<dict>
