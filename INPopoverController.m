@@ -9,6 +9,8 @@
 #import "INPopoverWindow.h"
 #import "INPopoverWindowFrame.h"
 
+#include <QuartzCore/QuartzCore.h>
+
 @interface INPopoverController ()
 - (void)_setInitialPropertyValues;
 - (void)_closePopoverAndResetVariables;
@@ -75,7 +77,7 @@
     [mainWindow addChildWindow:_popoverWindow ordered:NSWindowAbove]; // Add the popover as a child window of the main window
     [_popoverWindow makeKeyAndOrderFront:nil]; // Show the popover (if animation is enabled it won't be visible on screen YET)
     if (self.animates) { [[_popoverWindow animator] setAlphaValue:1.0]; } // Animate the popover in
-    [self _callDelegateMethod:@selector(popoverDidShow:)]; // Call the delegate
+    else { [self _callDelegateMethod:@selector(popoverDidShow:)]; } // Call the delegate
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     if (anchors) {  // If the anchors option is enabled, register for frame change notifications
@@ -113,7 +115,6 @@
     [self _callDelegateMethod:@selector(popoverWillClose:)]; // Call delegate
     if (self.animates) {
         [[_popoverWindow animator] setAlphaValue:0.0];
-        [self performSelector:@selector(_closePopoverAndResetVariables) withObject:nil afterDelay:[[NSAnimationContext currentContext] duration]]; // Call the cleanup method when the animation finishes
     } else {
         [self _closePopoverAndResetVariables];
     }
@@ -127,6 +128,17 @@
     [_contentViewController release];
     [_popoverWindow release];
     [super dealloc];
+}
+
+- (void) animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
+{
+#pragma unused(animation)
+#pragma unused(flag)
+	// Detect the end of fade out and close the window
+	if(0.0 == [_popoverWindow alphaValue])
+		[self _closePopoverAndResetVariables];
+	else if(1.0 == [_popoverWindow alphaValue])
+		[self _callDelegateMethod:@selector(popoverDidShow:)];
 }
 
 #pragma mark -
@@ -209,6 +221,10 @@
     
     // Create an empty popover window
     _popoverWindow = [[INPopoverWindow alloc] initWithContentRect:NSZeroRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+
+	CAAnimation *animation = [CABasicAnimation animation];
+	[animation setDelegate:self];
+	[_popoverWindow setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
 }
 
 // Calculate the frame of the window depending on the arrow direction

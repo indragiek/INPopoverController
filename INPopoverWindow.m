@@ -42,6 +42,11 @@
     return YES;
 }
 
+- (BOOL)canBecomeMainWindow
+{
+    return NO;
+}
+
 // Override the content view accessor to return the actual popover content view
 - (NSView*)contentView
 {
