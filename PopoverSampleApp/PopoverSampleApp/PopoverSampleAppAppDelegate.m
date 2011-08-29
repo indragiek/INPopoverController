@@ -17,10 +17,6 @@
 {
     ContentViewController *viewController = [[[ContentViewController alloc] initWithNibName:@"ContentViewController" bundle:nil] autorelease];
     self.popoverController = [[[INPopoverController alloc] initWithContentViewController:viewController] autorelease];
-    self.popoverController.closesWhenPopoverResignsKey = NO;
-    self.popoverController.color = [NSColor colorWithCalibratedWhite:1.0 alpha:0.8];
-    self.popoverController.borderColor = [NSColor blackColor];
-    self.popoverController.borderWidth = 2.0;
 }
 
 - (IBAction)togglePopover:(id)sender
@@ -28,8 +24,7 @@
     if (self.popoverController.popoverIsVisible) {
         [self.popoverController closePopover:nil];
     } else {
-        NSRect buttonBounds = [sender bounds];
-        [self.popoverController showPopoverAtPoint:NSMakePoint(NSMidX(buttonBounds), NSMidY(buttonBounds)) inView:sender preferredArrowDirection:INPopoverArrowDirectionLeft anchorsToPositionView:YES];
+        [self.popoverController presentPopoverFromRect:[sender bounds] inView:sender preferredArrowDirection:INPopoverArrowDirectionLeft anchorsToPositionView:YES];
     }
 }
 

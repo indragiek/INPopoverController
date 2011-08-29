@@ -11,17 +11,17 @@
 @class INPopoverWindow;
 @protocol INPopoverControllerDelegate;
 @interface INPopoverController : NSObject {
-    id<INPopoverControllerDelegate> _delegate;
-    NSSize _contentSize;
-    BOOL _closesWhenPopoverResignsKey;
-    BOOL _closesWhenApplicationBecomesInactive;
-    BOOL _animates;
-    NSViewController *_contentViewController;
+	id<INPopoverControllerDelegate> _delegate;
+	NSSize _contentSize;
+	BOOL _closesWhenPopoverResignsKey;
+	BOOL _closesWhenApplicationBecomesInactive;
+	BOOL _animates;
+	NSViewController *_contentViewController;
 
-    INPopoverWindow *_popoverWindow;
-    NSView *_positionView;
-    NSPoint _screenPoint;
-    NSPoint _viewPoint;
+	INPopoverWindow *_popoverWindow;
+	NSView *_positionView;
+	NSRect _screenRect;
+	NSRect _viewRect;
 }
 
 #pragma mark -
@@ -78,12 +78,12 @@
 
 /**
  Displays the popover.
- @param point the point in the positionView at which to display the popover
+ @param rect the rect in the positionView from which to display the popover
  @param positionView the view that the popover is positioned relative to
  @param direction the prefered direction at which the arrow will point. There is no guarantee that this will be the actual arrow direction, depending on whether the screen is able to accomodate the popover in that position.
  @param anchors Whether the popover binds to the frame of the positionView. This means that if the positionView is resized or moved, the popover will be repositioned according to the point at which it was originally placed. This also means that if the positionView goes off screen, the popover will be automatically closed. **/
 
-- (void)showPopoverAtPoint:(NSPoint)point inView:(NSView*)positionView preferredArrowDirection:(INPopoverArrowDirection)direction anchorsToPositionView:(BOOL)anchors;
+- (void)presentPopoverFromRect:(NSRect)rect inView:(NSView*)positionView preferredArrowDirection:(INPopoverArrowDirection)direction anchorsToPositionView:(BOOL)anchors;
 
 /** 
  Recalculates the best arrow direction for the current window position and resets the arrow direction. The change will not be animated. **/
@@ -100,6 +100,14 @@
  @param sender the object that sent this message
  */
 - (IBAction)forceClosePopover:(id)sender;
+
+/**
+ Returns the frame for a popop window with a given size depending on the arrow direction.
+ @param contentSize the popover window content size
+ @param direction the arrow direction
+ */
+- (NSRect)popoverFrameWithSize:(NSSize)contentSize andArrowDirection:(INPopoverArrowDirection)direction;
+
 @end
 
 @protocol INPopoverControllerDelegate <NSObject>

@@ -19,6 +19,7 @@
 		03932757131F62420007496E /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932753131F62420007496E /* INPopoverWindow.m */; };
 		03932758131F62420007496E /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932755131F62420007496E /* INPopoverWindowFrame.m */; };
 		0393275B131F62780007496E /* INAlwaysKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0393275A131F62780007496E /* INAlwaysKeyWindow.m */; };
+		868ABE8B140BE43F007A5488 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868ABE8A140BE43F007A5488 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		03932755131F62420007496E /* INPopoverWindowFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPopoverWindowFrame.m; path = ../../INPopoverWindowFrame.m; sourceTree = "<group>"; };
 		03932759131F62780007496E /* INAlwaysKeyWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INAlwaysKeyWindow.h; path = ../../Extras/INAlwaysKeyWindow.h; sourceTree = "<group>"; };
 		0393275A131F62780007496E /* INAlwaysKeyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAlwaysKeyWindow.m; path = ../../Extras/INAlwaysKeyWindow.m; sourceTree = "<group>"; };
+		868ABE8A140BE43F007A5488 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = SDKs/MacOSX10.6.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0393272D131F613D0007496E /* Cocoa.framework in Frameworks */,
+				868ABE8B140BE43F007A5488 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				0393272C131F613D0007496E /* Cocoa.framework */,
+				868ABE8A140BE43F007A5488 /* QuartzCore.framework */,
 				0393272E131F613D0007496E /* Other Frameworks */,
 			);
 			name = Frameworks;

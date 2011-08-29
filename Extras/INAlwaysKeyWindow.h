@@ -8,9 +8,8 @@
 #import <Foundation/Foundation.h>
 
 
-@interface INAlwaysKeyWindow : NSWindow {
-@private
-    
-}
+@interface INAlwaysKeyWindow : NSWindow
+
+- (BOOL)isReallyKeyWindow;
 
 @end

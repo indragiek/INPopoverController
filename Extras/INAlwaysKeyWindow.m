@@ -12,7 +12,12 @@
 
 - (BOOL)isKeyWindow
 {
-    return ([NSApp isActive]) ? YES : [super isKeyWindow];
+	return [[self childWindows] count] > 0 ? [NSApp isActive] : [super isKeyWindow];
+}
+
+- (BOOL)isReallyKeyWindow
+{
+	return [super isKeyWindow];
 }
 
 @end
