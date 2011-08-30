@@ -18,7 +18,7 @@
 		03932756131F62420007496E /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932750131F62420007496E /* INPopoverController.m */; };
 		03932757131F62420007496E /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932753131F62420007496E /* INPopoverWindow.m */; };
 		03932758131F62420007496E /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932755131F62420007496E /* INPopoverWindowFrame.m */; };
-		0393275B131F62780007496E /* INAlwaysKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0393275A131F62780007496E /* INAlwaysKeyWindow.m */; };
+		0393275B131F62780007496E /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0393275A131F62780007496E /* INPopoverParentWindow.m */; };
 		868ABE8B140BE43F007A5488 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868ABE8A140BE43F007A5488 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +46,8 @@
 		03932753131F62420007496E /* INPopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPopoverWindow.m; path = ../../INPopoverWindow.m; sourceTree = "<group>"; };
 		03932754131F62420007496E /* INPopoverWindowFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPopoverWindowFrame.h; path = ../../INPopoverWindowFrame.h; sourceTree = "<group>"; };
 		03932755131F62420007496E /* INPopoverWindowFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPopoverWindowFrame.m; path = ../../INPopoverWindowFrame.m; sourceTree = "<group>"; };
-		03932759131F62780007496E /* INAlwaysKeyWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INAlwaysKeyWindow.h; path = ../../Extras/INAlwaysKeyWindow.h; sourceTree = "<group>"; };
-		0393275A131F62780007496E /* INAlwaysKeyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAlwaysKeyWindow.m; path = ../../Extras/INAlwaysKeyWindow.m; sourceTree = "<group>"; };
+		03932759131F62780007496E /* INPopoverParentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPopoverParentWindow.h; path = ../../Extras/INPopoverParentWindow.h; sourceTree = "<group>"; };
+		0393275A131F62780007496E /* INPopoverParentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPopoverParentWindow.m; path = ../../Extras/INPopoverParentWindow.m; sourceTree = "<group>"; };
 		868ABE8A140BE43F007A5488 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = SDKs/MacOSX10.6.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -138,8 +138,8 @@
 				03932753131F62420007496E /* INPopoverWindow.m */,
 				03932754131F62420007496E /* INPopoverWindowFrame.h */,
 				03932755131F62420007496E /* INPopoverWindowFrame.m */,
-				03932759131F62780007496E /* INAlwaysKeyWindow.h */,
-				0393275A131F62780007496E /* INAlwaysKeyWindow.m */,
+				03932759131F62780007496E /* INPopoverParentWindow.h */,
+				0393275A131F62780007496E /* INPopoverParentWindow.m */,
 			);
 			name = INPopoverController;
 			sourceTree = "<group>";
@@ -214,7 +214,7 @@
 				03932756131F62420007496E /* INPopoverController.m in Sources */,
 				03932757131F62420007496E /* INPopoverWindow.m in Sources */,
 				03932758131F62420007496E /* INPopoverWindowFrame.m in Sources */,
-				0393275B131F62780007496E /* INAlwaysKeyWindow.m in Sources */,
+				0393275B131F62780007496E /* INPopoverParentWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 #import "INPopoverController.h"
 #import "INPopoverWindow.h"
 #import "INPopoverWindowFrame.h"
-#import "INAlwaysKeyWindow.h"
+#import "INPopoverParentWindow.h"
 
 #include <QuartzCore/QuartzCore.h>
 
@@ -193,7 +193,7 @@
 
 - (void)checkPopoverKeyWindowStatus
 {
-	id parentWindow = [_positionView window]; // could be INAlwaysKeyWindow
+	id parentWindow = [_positionView window]; // could be INPopoverParentWindow
 	BOOL isKey = [parentWindow respondsToSelector:@selector(isReallyKeyWindow)] ? [parentWindow isReallyKeyWindow] : [parentWindow isKeyWindow];
 	if (isKey)
 		[_popoverWindow makeKeyWindow];

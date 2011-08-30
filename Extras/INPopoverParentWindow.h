@@ -1,5 +1,5 @@
 //
-//  INAlwaysKeyWindow.h
+//  INPopoverParentWindow.h
 //  Copyright 2011 Indragie Karunaratne. All rights reserved.
 //
 //  Licensed under the BSD License <http://www.opensource.org/licenses/bsd-license>
@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface INAlwaysKeyWindow : NSWindow
+@interface INPopoverParentWindow : NSWindow
 
 - (BOOL)isReallyKeyWindow;
 
