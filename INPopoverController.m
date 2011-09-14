@@ -238,9 +238,8 @@
 		[_contentViewController release];
 		_contentViewController = [newContentViewController retain];
 		NSView *contentView = [_contentViewController view];
-		NSSize viewSize = [contentView frame].size;
+		self.contentSize = [contentView frame].size;
 		[_popoverWindow setContentView:contentView];
-		self.contentSize = viewSize;
 	}
 }
 
