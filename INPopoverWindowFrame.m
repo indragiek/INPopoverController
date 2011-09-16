@@ -12,7 +12,7 @@
 @end
 
 @implementation INPopoverWindowFrame
-@synthesize color = _color, borderColor = _borderColor;
+@synthesize color = _color, borderColor = _borderColor, topHighlightColor=_topHighlightColor;
 @synthesize borderWidth = _borderWidth;
 @synthesize arrowDirection = _arrowDirection;
 
@@ -31,6 +31,7 @@
 {
 	[_color release];
 	[_borderColor release];
+	[_topHighlightColor release];
 	[super dealloc];
 }
 
@@ -43,6 +44,12 @@
 	[path setLineWidth:self.borderWidth];
 	[self.borderColor set];
 	[path stroke];
+	
+	if (self.topHighlightColor) {
+		[self.topHighlightColor set];
+		NSRect bounds = NSInsetRect([self bounds], INPOPOVER_ARROW_HEIGHT, INPOPOVER_ARROW_HEIGHT);
+		NSRectFill(NSMakeRect(NSMinX(bounds)+INPOPOVER_CORNER_RADIUS/2, NSMaxY(bounds)-self.borderWidth-1, NSWidth(bounds)-INPOPOVER_CORNER_RADIUS, 1.0));
+	}
 }
 
 #pragma mark -

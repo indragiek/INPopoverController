@@ -15,10 +15,11 @@
 @interface INPopoverWindowFrame : NSView {
 	NSColor *_color;
 	NSColor *_borderColor;
+	NSColor *_topHighlightColor;
 	CGFloat _borderWidth;
 	INPopoverArrowDirection _arrowDirection;
 }
-@property (nonatomic, retain) NSColor *color, *borderColor;
+@property (nonatomic, retain) NSColor *color, *borderColor, *topHighlightColor;
 @property (nonatomic, assign) CGFloat borderWidth;
 @property (nonatomic, assign) INPopoverArrowDirection arrowDirection;
 @end

@@ -36,6 +36,9 @@
 /** Border color to use when drawing a border. Default value: [NSColor blackColor]. Changes to this value are not animated. **/
 @property (nonatomic, retain) NSColor *borderColor;
 
+/** Color to use for drawing a 1px highlight just below the top. Can be nil. Changes to this value are not animated. **/
+@property (nonatomic, retain) NSColor *topHighlightColor;
+
 /** The width of the popover border, drawn using borderColor. Default value: 0.0 (no border). Changes to this value are not animated. **/
 @property (nonatomic) CGFloat borderWidth;
 

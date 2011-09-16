@@ -210,6 +210,8 @@
 
 - (NSColor*)borderColor { return _popoverWindow.frameView.borderColor; }
 
+- (NSColor*)topHighlightColor { return _popoverWindow.frameView.topHighlightColor; }
+
 - (INPopoverArrowDirection)arrowDirection { return _popoverWindow.frameView.arrowDirection; }
 
 - (NSView*)contentView { return [self.popoverWindow contentView]; }
@@ -230,6 +232,8 @@
 - (void)setBorderWidth:(CGFloat)newBorderWidth { _popoverWindow.frameView.borderWidth = newBorderWidth; }
 
 - (void)setBorderColor:(NSColor *)newBorderColor { _popoverWindow.frameView.borderColor = newBorderColor; }
+
+- (void)setTopHighlightColor:(NSColor *)newTopHighlightColor { _popoverWindow.frameView.topHighlightColor = newTopHighlightColor; }
 
 - (void)setContentViewController:(NSViewController *)newContentViewController
 {
@@ -277,7 +281,7 @@
 	// set defaults like iCal popover
 	self.color = [NSColor colorWithCalibratedWhite:0.94 alpha:0.92];
 	self.borderColor = [NSColor colorWithCalibratedWhite:1.0 alpha:0.92];
-	self.borderWidth = 0.0;	// = 1px
+	self.borderWidth = 1.0;
 	self.closesWhenPopoverResignsKey = YES;
 	self.closesWhenApplicationBecomesInactive = NO;
 	self.animates = YES;
