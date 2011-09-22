@@ -70,7 +70,8 @@
 	[self _setArrowDirection:calculatedDirection]; // Change the arrow direction of the popover
 	NSRect windowFrame = [self popoverFrameWithSize:self.contentSize andArrowDirection:calculatedDirection]; // Calculate the window frame based on the arrow direction
 	[_popoverWindow setFrame:windowFrame display:YES]; // Se the frame of the window
-					
+	[[_popoverWindow animationForKey:@"alphaValue"] setDelegate:self];
+	
 	// Show the popover
 	[self _callDelegateMethod:@selector(popoverWillShow:)]; // Call the delegate
 	if (self.animates)
@@ -286,8 +287,8 @@
 	self.closesWhenApplicationBecomesInactive = NO;
 	self.animates = YES;
 	
+	// create animation to get callback - delegate is set when opening popover to avoid memory cycles
 	CAAnimation *animation = [CABasicAnimation animation];
-	[animation setDelegate:self];
 	[_popoverWindow setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
 }
 
@@ -377,6 +378,7 @@
 	[self _setArrowDirection:INPopoverArrowDirectionUndefined];
 	[self _setPositionView:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[_popoverWindow animationForKey:@"alphaValue"] setDelegate:nil];	// reset delegate so it doesn't retain us
 	_screenRect = NSZeroRect;
 	_viewRect = NSZeroRect;
 }
