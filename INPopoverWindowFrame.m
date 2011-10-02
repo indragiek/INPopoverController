@@ -48,7 +48,15 @@
 	if (self.topHighlightColor) {
 		[self.topHighlightColor set];
 		NSRect bounds = NSInsetRect([self bounds], INPOPOVER_ARROW_HEIGHT, INPOPOVER_ARROW_HEIGHT);
-		NSRectFill(NSMakeRect(NSMinX(bounds)+INPOPOVER_CORNER_RADIUS/2, NSMaxY(bounds)-self.borderWidth-1, NSWidth(bounds)-INPOPOVER_CORNER_RADIUS, 1.0));
+		NSRect lineRect = NSMakeRect(floor(NSMinX(bounds) + (INPOPOVER_CORNER_RADIUS / 2.0)), NSMaxY(bounds) - self.borderWidth - 1, NSWidth(bounds) - INPOPOVER_CORNER_RADIUS, 1.0);
+		
+		if (self.arrowDirection == INPopoverArrowDirectionUp) {
+			CGFloat width = floor((lineRect.size.width / 2.0) - (INPOPOVER_ARROW_WIDTH / 2.0));
+			NSRectFill(NSMakeRect(lineRect.origin.x, lineRect.origin.y, width, lineRect.size.height));
+			NSRectFill(NSMakeRect(floor(lineRect.origin.x + (lineRect.size.width / 2.0) + (INPOPOVER_ARROW_WIDTH / 2.0)), lineRect.origin.y, width, lineRect.size.height));
+		} else {
+			NSRectFill(lineRect);
+		}
 	}
 }
 
