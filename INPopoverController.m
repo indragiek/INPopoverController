@@ -202,8 +202,7 @@
 
 #pragma mark -
 #pragma mark Getters
-
-- (NSView*)positionView { return _positionView; }
+@synthesize positionView=_positionView, contentSize=_contentSize, popoverWindow=_popoverWindow, contentViewController=_contentViewController;
 
 - (NSColor*)color { return _popoverWindow.frameView.color; }
 
@@ -216,12 +215,6 @@
 - (INPopoverArrowDirection)arrowDirection { return _popoverWindow.frameView.arrowDirection; }
 
 - (NSView*)contentView { return [self.popoverWindow contentView]; }
-
-- (NSSize)contentSize { return _contentSize; }
-
-- (NSWindow*)popoverWindow { return _popoverWindow; }
-
-- (NSViewController*)contentViewController { return _contentViewController; }
 
 - (BOOL)popoverIsVisible { return [_popoverWindow isVisible]; }
 
