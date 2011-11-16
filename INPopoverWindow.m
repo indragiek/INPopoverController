@@ -8,54 +8,69 @@
 #import "INPopoverWindow.h"
 #import "INPopoverControllerDefines.h"
 #import "INPopoverWindowFrame.h"
+#import "INPopoverController.h"
+#import <QuartzCore/QuartzCore.h>
+
+#define START_SIZE			NSMakeSize(20, 20)
+#define OVERSHOOT_FACTOR	1.2
 
 // A lot of this code was adapted from the following article:
 // <http://cocoawithlove.com/2008/12/drawing-custom-window-on-mac-os-x.html>
+
+@interface INPopoverWindow ()
+- (NSWindow *)_zoomWindowWithRect:(NSRect)rect;
+@end
 
 @implementation INPopoverWindow
 
 // Borderless, transparent window
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation
 {
-    if ((self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:bufferingType defer:deferCreation])) {
-        [self setOpaque:NO];
-        [self setBackgroundColor:[NSColor clearColor]];
-    }
-    return self;
+	if ((self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:bufferingType defer:deferCreation])) {
+		[self setOpaque:NO];
+		[self setBackgroundColor:[NSColor clearColor]];
+		[self setHasShadow:YES];
+	}
+	return self;
 }
 
 // Leave some space around the content for drawing the arrow
 - (NSRect)contentRectForFrameRect:(NSRect)windowFrame
 {
-    windowFrame.origin = NSZeroPoint;
-    return NSInsetRect(windowFrame, INPOPOVER_ARROW_HEIGHT, INPOPOVER_ARROW_HEIGHT);
+	windowFrame.origin = NSZeroPoint;
+	return NSInsetRect(windowFrame, INPOPOVER_ARROW_HEIGHT, INPOPOVER_ARROW_HEIGHT);
 }
 
 - (NSRect)frameRectForContentRect:(NSRect)contentRect
 {
-    return NSInsetRect(contentRect, -INPOPOVER_ARROW_HEIGHT, -INPOPOVER_ARROW_HEIGHT);
+	return NSInsetRect(contentRect, -INPOPOVER_ARROW_HEIGHT, -INPOPOVER_ARROW_HEIGHT);
 }
 
 // Allow the popover to become the key window
 - (BOOL)canBecomeKeyWindow
 {
-    return YES;
+	return YES;
 }
 
 - (BOOL)canBecomeMainWindow
 {
-    return NO;
+	return NO;
+}
+
+- (BOOL)isVisible
+{
+	return [super isVisible] || [_zoomWindow isVisible];
 }
 
 // Override the content view accessor to return the actual popover content view
 - (NSView*)contentView
 {
-    return _popoverContentView;
+	return _popoverContentView;
 }
 
 - (INPopoverWindowFrame*)frameView
 {
-    return (INPopoverWindowFrame*)[super contentView];
+	return (INPopoverWindowFrame*)[super contentView];
 }
 
 - (void)setContentView:(NSView *)aView
@@ -75,6 +90,102 @@
 	[_popoverContentView setFrame:[self contentRectForFrameRect:bounds]];
 	[_popoverContentView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 	[frameView addSubview:_popoverContentView];
+}
+
+- (void)presentWithPopoverController:(INPopoverController *)popoverController
+{
+	if ([self isVisible])
+		return;
+	
+	NSRect endFrame = [self frame];
+	NSRect startFrame = [popoverController popoverFrameWithSize:START_SIZE andArrowDirection:self.frameView.arrowDirection];
+	NSRect overshootFrame = [popoverController popoverFrameWithSize:NSMakeSize(endFrame.size.width*OVERSHOOT_FACTOR, endFrame.size.height*OVERSHOOT_FACTOR) andArrowDirection:self.frameView.arrowDirection];
+	
+	_zoomWindow = [[self _zoomWindowWithRect:startFrame] retain];
+	
+	[_zoomWindow setAlphaValue:0.0];
+	[_zoomWindow orderFront:self];
+	
+	// configure bounce-out animation
+	CAKeyframeAnimation *anim = [CAKeyframeAnimation animation];
+	[anim setDelegate:self];
+	[anim setValues:[NSArray arrayWithObjects:[NSValue valueWithRect:startFrame], [NSValue valueWithRect:overshootFrame], [NSValue valueWithRect:endFrame], nil]];
+	[_zoomWindow setAnimations:[NSDictionary dictionaryWithObjectsAndKeys:anim, @"frame", nil]];
+	
+	[[_zoomWindow animator] setAlphaValue:1.0];
+	[[_zoomWindow animator] setFrame:endFrame display:YES];
+}
+
+- (void)dismissAnimated
+{
+	[[_zoomWindow animator] setAlphaValue:0.0]; // in case zoom window is currently animating
+	[[self animator] setAlphaValue:0.0];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+	[self makeKeyAndOrderFront:self];	
+	[_zoomWindow close];
+	
+	[_zoomWindow release];
+	_zoomWindow = nil;
+	
+	// call the animation delegate of the "real" window
+	CAAnimation *windowAnimation = [self animationForKey:@"alphaValue"];
+	[[windowAnimation delegate] animationDidStop:anim finished:flag];
+}
+
+#pragma mark -
+#pragma mark Private
+
+// The following method is adapted from the following class:
+// <https://github.com/MrNoodle/NoodleKit/blob/master/NSWindow-NoodleEffects.m>
+//  Copyright 2007-2009 Noodlesoft, LLC. All rights reserved.
+- (NSWindow *)_zoomWindowWithRect:(NSRect)rect
+{
+	BOOL isOneShot = [self isOneShot];
+	if (isOneShot)
+		[self setOneShot:NO];
+	
+	if ([self windowNumber] <= 0)
+	{
+        // force creation of window device by putting it on-screen. We make it transparent to minimize the chance of visible flicker
+		CGFloat alpha = [self alphaValue];
+		[self setAlphaValue:0.0];
+		[self orderBack:self];
+		[self orderOut:self];
+		[self setAlphaValue:alpha];
+	}
+	
+	// get window content as image
+	NSRect frame = [self frame];
+	NSImage *image = [[[NSImage alloc] initWithSize:frame.size] autorelease];
+	[self displayIfNeeded];	// refresh view
+	[image lockFocus];
+	NSCopyBits([self gState], NSMakeRect(0.0, 0.0, frame.size.width, frame.size.height), NSZeroPoint);
+	[image unlockFocus];
+	
+	// create zoom window
+	NSWindow *zoomWindow = [[NSWindow alloc] initWithContentRect:rect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+	[zoomWindow setBackgroundColor:[NSColor clearColor]];
+	[zoomWindow setHasShadow:[self hasShadow]];
+	[zoomWindow setLevel:[self level]];
+	[zoomWindow setOpaque:NO];
+	[zoomWindow setReleasedWhenClosed:YES];
+	[zoomWindow useOptimizedDrawing:YES];
+	
+	NSImageView *imageView = [[[NSImageView alloc] initWithFrame:[zoomWindow contentRectForFrameRect:frame]] autorelease];
+	[imageView setImage:image];
+	[imageView setImageFrameStyle:NSImageFrameNone];
+	[imageView setImageScaling:NSScaleToFit];
+	[imageView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
+	
+	[zoomWindow setContentView:imageView];
+	
+	// reset one shot flag
+	[self setOneShot:isOneShot];
+	
+	return zoomWindow;
 }
 
 @end
