@@ -196,6 +196,9 @@
 /* Begin PBXProject section */
 		98BA892D143EA049006F744E /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+			};
 			buildConfigurationList = 98BA8930143EA049006F744E /* Build configuration list for PBXProject "INPopoverController" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
