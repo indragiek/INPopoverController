@@ -19,6 +19,10 @@
 		98BA897D143EA1B7006F744E /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 98BA897B143EA1B7006F744E /* INPopoverParentWindow.m */; };
 		98BA8983143EA1E9006F744E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98BA8982143EA1E9006F744E /* QuartzCore.framework */; };
 		98BA8985143EA28E006F744E /* INPopoverPrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 98BA8984143EA28E006F744E /* INPopoverPrefixHeader.pch */; };
+		A1331BCE15A8CB300077D8C3 /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98BA896D143EA10E006F744E /* INPopoverController.m */; };
+		A1331BCF15A8CB300077D8C3 /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 98BA897B143EA1B7006F744E /* INPopoverParentWindow.m */; };
+		A1331BD015A8CB300077D8C3 /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 98BA8970143EA10E006F744E /* INPopoverWindow.m */; };
+		A1331BD115A8CB300077D8C3 /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 98BA8972143EA10E006F744E /* INPopoverWindowFrame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,7 @@
 		98BA897B143EA1B7006F744E /* INPopoverParentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverParentWindow.m; sourceTree = SOURCE_ROOT; };
 		98BA8982143EA1E9006F744E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = SDKs/MacOSX10.6.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		98BA8984143EA28E006F744E /* INPopoverPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverPrefixHeader.pch; sourceTree = "<group>"; };
+		A1331BC915A8CB170077D8C3 /* libINPopoverController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libINPopoverController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +53,13 @@
 			files = (
 				98BA893B143EA04A006F744E /* Cocoa.framework in Frameworks */,
 				98BA8983143EA1E9006F744E /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1331BC615A8CB170077D8C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				98BA8937143EA04A006F744E /* INPopoverController.framework */,
+				A1331BC915A8CB170077D8C3 /* libINPopoverController.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +146,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1331BC715A8CB170077D8C3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -154,11 +174,31 @@
 			productReference = 98BA8937143EA04A006F744E /* INPopoverController.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		A1331BC815A8CB170077D8C3 /* INPopoverController-static */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1331BCC15A8CB170077D8C3 /* Build configuration list for PBXNativeTarget "INPopoverController-static" */;
+			buildPhases = (
+				A1331BC515A8CB170077D8C3 /* Sources */,
+				A1331BC615A8CB170077D8C3 /* Frameworks */,
+				A1331BC715A8CB170077D8C3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "INPopoverController-static";
+			productName = "INPopoverController-static";
+			productReference = A1331BC915A8CB170077D8C3 /* libINPopoverController.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		98BA892D143EA049006F744E /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+			};
 			buildConfigurationList = 98BA8930143EA049006F744E /* Build configuration list for PBXProject "INPopoverController" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -172,6 +212,7 @@
 			projectRoot = "";
 			targets = (
 				98BA8936143EA04A006F744E /* INPopoverController */,
+				A1331BC815A8CB170077D8C3 /* INPopoverController-static */,
 			);
 		};
 /* End PBXProject section */
@@ -198,6 +239,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1331BC515A8CB170077D8C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1331BCE15A8CB300077D8C3 /* INPopoverController.m in Sources */,
+				A1331BCF15A8CB300077D8C3 /* INPopoverParentWindow.m in Sources */,
+				A1331BD015A8CB300077D8C3 /* INPopoverWindow.m in Sources */,
+				A1331BD115A8CB300077D8C3 /* INPopoverWindowFrame.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -206,7 +258,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -224,6 +279,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -231,8 +287,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				COPY_PHASE_STRIP = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -243,6 +301,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -292,6 +351,32 @@
 			};
 			name = Release;
 		};
+		A1331BCA15A8CB170077D8C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = INPopoverController;
+				STRIP_INSTALLED_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		A1331BCB15A8CB170077D8C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = INPopoverController;
+				STRIP_INSTALLED_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -309,6 +394,15 @@
 			buildConfigurations = (
 				98BA8963143EA04B006F744E /* Debug */,
 				98BA8964143EA04B006F744E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1331BCC15A8CB170077D8C3 /* Build configuration list for PBXNativeTarget "INPopoverController-static" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1331BCA15A8CB170077D8C3 /* Debug */,
+				A1331BCB15A8CB170077D8C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
