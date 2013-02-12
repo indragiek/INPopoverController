@@ -27,6 +27,7 @@
 	return self;
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	[_color release];
@@ -34,6 +35,7 @@
 	[_topHighlightColor release];
 	[super dealloc];
 }
+#endif
 
 - (void)drawRect:(NSRect)dirtyRect
 {
@@ -128,8 +130,12 @@
 - (void)setColor:(NSColor *)newColor
 {
 	if (_color != newColor) {
+#if __has_feature(objc_arc)
+        _color = newColor;
+#else
 		[_color release];
 		_color = [newColor retain];
+#endif
 		[self setNeedsDisplay:YES];
 	}
 }
@@ -137,8 +143,12 @@
 - (void)setBorderColor:(NSColor *)newBorderColor
 {
 	if (_borderColor != newBorderColor) {
+#if __has_feature(objc_arc)
+        _borderColor = newBorderColor;
+#else
 		[_borderColor release];
 		_borderColor = [newBorderColor retain];
+#endif
 		[self setNeedsDisplay:YES];
 	}
 }
