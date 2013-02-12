@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
 	s.platform 				= :osx
 	s.requires_arc 			= true
 	s.license				= 'BSD'
+	s.frameworks			= 'QuartzCore'
 end
