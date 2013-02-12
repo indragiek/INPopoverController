@@ -216,7 +216,7 @@
 
 - (INPopoverArrowDirection)arrowDirection { return _popoverWindow.frameView.arrowDirection; }
 
-- (NSView*)contentView { return [self.popoverWindow contentView]; }
+- (NSView*)contentView { return [_popoverWindow popoverContentView]; }
 
 - (BOOL)popoverIsVisible { return [_popoverWindow isVisible]; }
 
@@ -234,7 +234,7 @@
 - (void)setContentViewController:(NSViewController *)newContentViewController
 {
 	if (_contentViewController != newContentViewController) {
-		[_popoverWindow setContentView:nil]; // Clear the content view
+		[_popoverWindow setPopoverContentView:nil]; // Clear the content view
 #if __has_feature(objc_arc)
         _contentViewController = newContentViewController;
 #else
@@ -243,7 +243,7 @@
 #endif
 		NSView *contentView = [_contentViewController view];
 		self.contentSize = [contentView frame].size;
-		[_popoverWindow setContentView:contentView];
+		[_popoverWindow setPopoverContentView:contentView];
 	}
 }
 

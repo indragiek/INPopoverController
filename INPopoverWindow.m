@@ -62,30 +62,29 @@
 	return [super isVisible] || [_zoomWindow isVisible];
 }
 
-// Override the content view accessor to return the actual popover content view
-- (NSView*)contentView
-{
-	return _popoverContentView;
-}
-
 - (INPopoverWindowFrame*)frameView
 {
-	return (INPopoverWindowFrame*)[super contentView];
+	return (INPopoverWindowFrame*)[self contentView];
 }
 
 - (void)setContentView:(NSView *)aView
 {
+    [self setPopoverContentView:aView];
+}
+
+- (void)setPopoverContentView:(NSView *)aView
+{
 	if ([_popoverContentView isEqualTo:aView]) { return; }
 	NSRect bounds = [self frame];
 	bounds.origin = NSZeroPoint;
-	INPopoverWindowFrame *frameView = [super contentView];
+	INPopoverWindowFrame *frameView = [self frameView];
 	if (!frameView) {
 #if __has_feature(objc_arc)
         frameView = [[INPopoverWindowFrame alloc] initWithFrame:bounds];
 #else
 		frameView = [[[INPopoverWindowFrame alloc] initWithFrame:bounds] autorelease];
 #endif
-		[super setContentView:frameView];
+		[super setContentView:frameView]; // Call on super or there will be infinite loop
 	}
 	if (_popoverContentView) {
 		[_popoverContentView removeFromSuperview];
