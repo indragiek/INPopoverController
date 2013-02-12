@@ -62,26 +62,29 @@
 	return [super isVisible] || [_zoomWindow isVisible];
 }
 
-// Override the content view accessor to return the actual popover content view
-- (NSView*)contentView
-{
-	return _popoverContentView;
-}
-
 - (INPopoverWindowFrame*)frameView
 {
-	return (INPopoverWindowFrame*)[super contentView];
+	return (INPopoverWindowFrame*)[self contentView];
 }
 
 - (void)setContentView:(NSView *)aView
 {
+    [self setPopoverContentView:aView];
+}
+
+- (void)setPopoverContentView:(NSView *)aView
+{
 	if ([_popoverContentView isEqualTo:aView]) { return; }
 	NSRect bounds = [self frame];
 	bounds.origin = NSZeroPoint;
-	INPopoverWindowFrame *frameView = [super contentView];
+	INPopoverWindowFrame *frameView = [self frameView];
 	if (!frameView) {
+#if __has_feature(objc_arc)
+        frameView = [[INPopoverWindowFrame alloc] initWithFrame:bounds];
+#else
 		frameView = [[[INPopoverWindowFrame alloc] initWithFrame:bounds] autorelease];
-		[super setContentView:frameView];
+#endif
+		[super setContentView:frameView]; // Call on super or there will be infinite loop
 	}
 	if (_popoverContentView) {
 		[_popoverContentView removeFromSuperview];
@@ -101,7 +104,11 @@
 	NSRect startFrame = [popoverController popoverFrameWithSize:START_SIZE andArrowDirection:self.frameView.arrowDirection];
 	NSRect overshootFrame = [popoverController popoverFrameWithSize:NSMakeSize(endFrame.size.width*OVERSHOOT_FACTOR, endFrame.size.height*OVERSHOOT_FACTOR) andArrowDirection:self.frameView.arrowDirection];
 	
+#if __has_feature(objc_arc)
+    _zoomWindow = [self _zoomWindowWithRect:startFrame];
+#else
 	_zoomWindow = [[self _zoomWindowWithRect:startFrame] retain];
+#endif
 	
 	[_zoomWindow setAlphaValue:0.0];
 	[_zoomWindow orderFront:self];
@@ -127,7 +134,9 @@
 	[self makeKeyAndOrderFront:self];	
 	[_zoomWindow close];
 	
+#if !__has_feature(objc_arc)
 	[_zoomWindow release];
+#endif
 	_zoomWindow = nil;
 	
 	// call the animation delegate of the "real" window
@@ -159,7 +168,11 @@
 	
 	// get window content as image
 	NSRect frame = [self frame];
+#if __has_feature(objc_arc)
+	NSImage *image = [[NSImage alloc] initWithSize:frame.size];
+#else
 	NSImage *image = [[[NSImage alloc] initWithSize:frame.size] autorelease];
+#endif
 	[self displayIfNeeded];	// refresh view
 	[image lockFocus];
 	NSCopyBits([self gState], NSMakeRect(0.0, 0.0, frame.size.width, frame.size.height), NSZeroPoint);
@@ -173,8 +186,12 @@
 	[zoomWindow setOpaque:NO];
 	[zoomWindow setReleasedWhenClosed:YES];
 	[zoomWindow useOptimizedDrawing:YES];
-	
+
+#if __has_feature(objc_arc)
+	NSImageView *imageView = [[NSImageView alloc] initWithFrame:[zoomWindow contentRectForFrameRect:frame]];
+#else
 	NSImageView *imageView = [[[NSImageView alloc] initWithFrame:[zoomWindow contentRectForFrameRect:frame]] autorelease];
+#endif
 	[imageView setImage:image];
 	[imageView setImageFrameStyle:NSImageFrameNone];
 	[imageView setImageScaling:NSScaleToFit];
