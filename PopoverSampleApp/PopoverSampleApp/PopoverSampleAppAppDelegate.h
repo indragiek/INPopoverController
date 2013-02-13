@@ -10,10 +10,10 @@
 @class INPopoverController;
 @interface PopoverSampleAppAppDelegate : NSObject <NSApplicationDelegate> {
 @private
-    NSWindow *window;
+    NSWindow *__weak window;
     INPopoverController *popoverController;
 }
-@property (nonatomic, retain) INPopoverController *popoverController;
-@property (assign) IBOutlet NSWindow *window;
+@property (nonatomic, strong) INPopoverController *popoverController;
+@property (weak) IBOutlet NSWindow *window;
 - (IBAction)togglePopover:(id)sender;
 @end

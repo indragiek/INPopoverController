@@ -15,8 +15,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    ContentViewController *viewController = [[[ContentViewController alloc] initWithNibName:@"ContentViewController" bundle:nil] autorelease];
-    self.popoverController = [[[INPopoverController alloc] initWithContentViewController:viewController] autorelease];
+    ContentViewController *viewController = [[ContentViewController alloc] initWithNibName:@"ContentViewController" bundle:nil];
+    self.popoverController = [[INPopoverController alloc] initWithContentViewController:viewController];
 }
 
 - (IBAction)togglePopover:(id)sender
@@ -28,9 +28,4 @@
     }
 }
 
-- (void)dealloc
-{
-    [popoverController release];
-    [super dealloc];
-}
 @end
