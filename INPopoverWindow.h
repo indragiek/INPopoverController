@@ -19,7 +19,8 @@
 	NSWindow *_zoomWindow;
 }
 
-@property (nonatomic, readonly) INPopoverWindowFrame *frameView;
+@property (nonatomic, readonly) INPopoverWindowFrame *frameView; // Equivalent to contentView
+@property (nonatomic, retain) NSView *popoverContentView;
 
 - (void)presentWithPopoverController:(INPopoverController *)popoverController;
 - (void)dismissAnimated;

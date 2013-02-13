@@ -165,12 +165,14 @@
 #pragma mark -
 #pragma mark Memory Management
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	[_contentViewController release];
 	[_popoverWindow release];
 	[super dealloc];
 }
+#endif
 
 - (void) animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
 {
@@ -214,7 +216,7 @@
 
 - (INPopoverArrowDirection)arrowDirection { return _popoverWindow.frameView.arrowDirection; }
 
-- (NSView*)contentView { return [self.popoverWindow contentView]; }
+- (NSView*)contentView { return [_popoverWindow popoverContentView]; }
 
 - (BOOL)popoverIsVisible { return [_popoverWindow isVisible]; }
 
@@ -232,12 +234,16 @@
 - (void)setContentViewController:(NSViewController *)newContentViewController
 {
 	if (_contentViewController != newContentViewController) {
-		[_popoverWindow setContentView:nil]; // Clear the content view
+		[_popoverWindow setPopoverContentView:nil]; // Clear the content view
+#if __has_feature(objc_arc)
+        _contentViewController = newContentViewController;
+#else
 		[_contentViewController release];
 		_contentViewController = [newContentViewController retain];
+#endif
 		NSView *contentView = [_contentViewController view];
 		self.contentSize = [contentView frame].size;
-		[_popoverWindow setContentView:contentView];
+		[_popoverWindow setPopoverContentView:contentView];
 	}
 }
 
@@ -253,13 +259,17 @@
 
 - (void)_setPositionView:(NSView*)newPositionView
 {
+#if __has_feature(objc_arc)
+    _positionView = newPositionView;
+#else
 	if (_positionView != newPositionView) {
 		[_positionView release];
 		_positionView = [newPositionView retain];
 	}
+#endif
 }
 
-- (void)_setArrowDirection:(INPopoverArrowDirection)direction { 
+- (void)_setArrowDirection:(INPopoverArrowDirection)direction {
 	_popoverWindow.frameView.arrowDirection = direction; 
 }
 
@@ -379,7 +389,15 @@
 - (void)_callDelegateMethod:(SEL)selector
 {
 	if ([self.delegate respondsToSelector:selector]) {
+
+#if __has_feature(objc_arc)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 		[self.delegate performSelector:selector withObject:self];
+#pragma clang diagnostic pop
+#else
+		[self.delegate performSelector:selector withObject:self];
+#endif
 	}
 }
 
