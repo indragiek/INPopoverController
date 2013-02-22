@@ -184,7 +184,11 @@
 	[zoomWindow setHasShadow:[self hasShadow]];
 	[zoomWindow setLevel:[self level]];
 	[zoomWindow setOpaque:NO];
+#if __has_feature(objc_arc)
+	[zoomWindow setReleasedWhenClosed:NO];
+#else
 	[zoomWindow setReleasedWhenClosed:YES];
+#endif
 	[zoomWindow useOptimizedDrawing:YES];
 
 #if __has_feature(objc_arc)
