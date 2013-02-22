@@ -15,10 +15,10 @@
 		03932743131F613D0007496E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03932741131F613D0007496E /* MainMenu.xib */; };
 		0393274C131F61590007496E /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0393274A131F61590007496E /* ContentViewController.m */; };
 		0393274D131F61590007496E /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0393274B131F61590007496E /* ContentViewController.xib */; };
-		03932756131F62420007496E /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932750131F62420007496E /* INPopoverController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		03932757131F62420007496E /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932753131F62420007496E /* INPopoverWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		03932758131F62420007496E /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932755131F62420007496E /* INPopoverWindowFrame.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0393275B131F62780007496E /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0393275A131F62780007496E /* INPopoverParentWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		03932756131F62420007496E /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932750131F62420007496E /* INPopoverController.m */; };
+		03932757131F62420007496E /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932753131F62420007496E /* INPopoverWindow.m */; };
+		03932758131F62420007496E /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932755131F62420007496E /* INPopoverWindowFrame.m */; };
+		0393275B131F62780007496E /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0393275A131F62780007496E /* INPopoverParentWindow.m */; };
 		BFF06C9116CAAEC100C3D751 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF06C9016CAAEC100C3D751 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
