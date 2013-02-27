@@ -381,9 +381,11 @@
 	[self _setArrowDirection:INPopoverArrowDirectionUndefined];
 	[self _setPositionView:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[[_popoverWindow animationForKey:@"alphaValue"] setDelegate:nil];	// reset delegate so it doesn't retain us
 	_screenRect = NSZeroRect;
 	_viewRect = NSZeroRect;
+    
+    // When using ARC and no animation, there is a "message sent to deallocated instance" crash if setDelegate: is not performed at the end of the event.
+    [[_popoverWindow animationForKey:@"alphaValue"] performSelector:@selector(setDelegate:) withObject:nil afterDelay:0];
 }
 
 - (void)_callDelegateMethod:(SEL)selector
