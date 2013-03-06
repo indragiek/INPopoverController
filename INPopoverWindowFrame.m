@@ -39,7 +39,11 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-	NSBezierPath *path = [self _popoverBezierPathWithRect:[self bounds]];
+    NSRect bounds = [self bounds];
+    if ( ( (int)self.borderWidth % 2 ) == 1) // Remove draw glitch on odd border width
+        bounds = NSInsetRect(bounds, 0.5f, 0.5f);
+    
+	NSBezierPath *path = [self _popoverBezierPathWithRect:bounds];
 	[self.color set];
 	[path fill];
 	
