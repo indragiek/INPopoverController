@@ -23,6 +23,8 @@
 
 @implementation INPopoverWindow
 
+@synthesize canBecomeKeyWindow = _canBecomeKeyWindow;
+
 // Borderless, transparent window
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation
 {
@@ -30,6 +32,7 @@
 		[self setOpaque:NO];
 		[self setBackgroundColor:[NSColor clearColor]];
 		[self setHasShadow:YES];
+        [self setCanBecomeKeyWindow:YES];
 	}
 	return self;
 }
@@ -49,7 +52,7 @@
 // Allow the popover to become the key window
 - (BOOL)canBecomeKeyWindow
 {
-	return YES;
+	return _canBecomeKeyWindow;
 }
 
 - (BOOL)canBecomeMainWindow

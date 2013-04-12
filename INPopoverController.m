@@ -403,4 +403,14 @@
 	}
 }
 
+- (void)setWindowCanBecomeKey:(BOOL)windowCanBecomeKey
+{
+    _popoverWindow.canBecomeKeyWindow = windowCanBecomeKey;
+}
+
+- (BOOL)windowCanBecomeKey
+{
+    return _popoverWindow.canBecomeKeyWindow;
+}
+
 @end
