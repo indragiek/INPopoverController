@@ -376,7 +376,8 @@
 	[_popoverWindow orderOut:nil]; // Close the window 
 	[self _callDelegateMethod:@selector(popoverDidClose:)]; // Call the delegate to inform that the popover has closed
 	[positionWindow removeChildWindow:_popoverWindow]; // Remove it as a child window
-	[positionWindow makeKeyAndOrderFront:nil];
+    if ( _windowCanBecomeKey )
+        [positionWindow makeKeyAndOrderFront:nil];
 	// Clear all the ivars
 	[self _setArrowDirection:INPopoverArrowDirectionUndefined];
 	[self _setPositionView:nil];
