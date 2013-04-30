@@ -111,7 +111,7 @@
 - (IBAction)closePopover:(id)sender
 {
 	if (![_popoverWindow isVisible]) { return; }
-	if ([sender isKindOfClass:[NSNotification class]] && [[sender name] isEqualToString:NSWindowDidResignKeyNotification]) {
+	if ([sender isKindOfClass:[NSNotification class]] && [[(NSNotification*)sender name] isEqualToString:NSWindowDidResignKeyNotification]) {
 		// ignore "resign key" notification sent when app becomes inactive unless closesWhenApplicationBecomesInactive is enabled
 		if (!self.closesWhenApplicationBecomesInactive && ![NSApp isActive])
 			return;
