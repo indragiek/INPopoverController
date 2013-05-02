@@ -77,6 +77,9 @@
 /** Whether the popover is currently visible or not **/
 @property (readonly) BOOL popoverIsVisible;
 
+/** Whether the window can become key or not. Default value: YES **/
+@property (nonatomic, assign) BOOL windowCanBecomeKey;
+
 #pragma mark -
 #pragma mark Methods
 

@@ -17,10 +17,12 @@
 @interface INPopoverWindow : NSWindow {
 	NSView *_popoverContentView;
 	NSWindow *_zoomWindow;
+    BOOL _canBecomeKeyWindow;
 }
 
 @property (nonatomic, readonly) INPopoverWindowFrame *frameView; // Equivalent to contentView
 @property (nonatomic, retain) NSView *popoverContentView;
+@property (nonatomic, assign) BOOL canBecomeKeyWindow;
 
 - (void)presentWithPopoverController:(INPopoverController *)popoverController;
 - (void)dismissAnimated;
