@@ -20,7 +20,6 @@
 	BOOL _closesWhenPopoverResignsKey;
 	BOOL _closesWhenApplicationBecomesInactive;
 	BOOL _animates;
-    BOOL _windowCanBecomeKey;
 	NSViewController *_contentViewController;
 
 	INPopoverWindow *_popoverWindow;
