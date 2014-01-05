@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03657F2B187A09BE00C969BA /* INPopoverController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03657F28187A09A000C969BA /* INPopoverController.framework */; };
+		03657F2D187A09C900C969BA /* INPopoverController.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03657F28187A09A000C969BA /* INPopoverController.framework */; };
 		0393272D131F613D0007496E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0393272C131F613D0007496E /* Cocoa.framework */; };
 		03932737131F613D0007496E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03932735131F613D0007496E /* InfoPlist.strings */; };
 		0393273A131F613D0007496E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932739131F613D0007496E /* main.m */; };
@@ -15,14 +17,41 @@
 		03932743131F613D0007496E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03932741131F613D0007496E /* MainMenu.xib */; };
 		0393274C131F61590007496E /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0393274A131F61590007496E /* ContentViewController.m */; };
 		0393274D131F61590007496E /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0393274B131F61590007496E /* ContentViewController.xib */; };
-		03932756131F62420007496E /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932750131F62420007496E /* INPopoverController.m */; };
-		03932757131F62420007496E /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932753131F62420007496E /* INPopoverWindow.m */; };
-		03932758131F62420007496E /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932755131F62420007496E /* INPopoverWindowFrame.m */; };
-		0393275B131F62780007496E /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0393275A131F62780007496E /* INPopoverParentWindow.m */; };
 		BFF06C9116CAAEC100C3D751 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF06C9016CAAEC100C3D751 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		03657F27187A09A000C969BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03657F23187A09A000C969BA /* INPopoverController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 98BA8937143EA04A006F744E;
+			remoteInfo = INPopoverController;
+		};
+		03657F29187A09BA00C969BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03657F23187A09A000C969BA /* INPopoverController.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 98BA8936143EA04A006F744E;
+			remoteInfo = INPopoverController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		03657F2C187A09C300C969BA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				03657F2D187A09C900C969BA /* INPopoverController.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		03657F23187A09A000C969BA /* INPopoverController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = INPopoverController.xcodeproj; path = ../../INPopoverController.xcodeproj; sourceTree = "<group>"; };
 		03932728131F613D0007496E /* PopoverSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopoverSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0393272C131F613D0007496E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0393272F131F613D0007496E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -39,15 +68,6 @@
 		03932749131F61590007496E /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		0393274A131F61590007496E /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		0393274B131F61590007496E /* ContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentViewController.xib; sourceTree = "<group>"; };
-		0393274F131F62420007496E /* INPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverController.h; sourceTree = "<group>"; };
-		03932750131F62420007496E /* INPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverController.m; sourceTree = "<group>"; };
-		03932751131F62420007496E /* INPopoverControllerDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverControllerDefines.h; sourceTree = "<group>"; };
-		03932752131F62420007496E /* INPopoverWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverWindow.h; sourceTree = "<group>"; };
-		03932753131F62420007496E /* INPopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverWindow.m; sourceTree = "<group>"; };
-		03932754131F62420007496E /* INPopoverWindowFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverWindowFrame.h; sourceTree = "<group>"; };
-		03932755131F62420007496E /* INPopoverWindowFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverWindowFrame.m; sourceTree = "<group>"; };
-		03932759131F62780007496E /* INPopoverParentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverParentWindow.h; sourceTree = "<group>"; };
-		0393275A131F62780007496E /* INPopoverParentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverParentWindow.m; sourceTree = "<group>"; };
 		BFF06C9016CAAEC100C3D751 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -56,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03657F2B187A09BE00C969BA /* INPopoverController.framework in Frameworks */,
 				BFF06C9116CAAEC100C3D751 /* QuartzCore.framework in Frameworks */,
 				0393272D131F613D0007496E /* Cocoa.framework in Frameworks */,
 			);
@@ -64,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03657F24187A09A000C969BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03657F28187A09A000C969BA /* INPopoverController.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0393271D131F613D0007496E = {
 			isa = PBXGroup;
 			children = (
@@ -104,7 +133,7 @@
 		03932732131F613D0007496E /* PopoverSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				0393274E131F62170007496E /* INPopoverController */,
+				03657F23187A09A000C969BA /* INPopoverController.xcodeproj */,
 				0393273E131F613D0007496E /* PopoverSampleAppAppDelegate.h */,
 				0393273F131F613D0007496E /* PopoverSampleAppAppDelegate.m */,
 				03932749131F61590007496E /* ContentViewController.h */,
@@ -128,23 +157,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0393274E131F62170007496E /* INPopoverController */ = {
-			isa = PBXGroup;
-			children = (
-				0393274F131F62420007496E /* INPopoverController.h */,
-				03932750131F62420007496E /* INPopoverController.m */,
-				03932751131F62420007496E /* INPopoverControllerDefines.h */,
-				03932752131F62420007496E /* INPopoverWindow.h */,
-				03932753131F62420007496E /* INPopoverWindow.m */,
-				03932754131F62420007496E /* INPopoverWindowFrame.h */,
-				03932755131F62420007496E /* INPopoverWindowFrame.m */,
-				03932759131F62780007496E /* INPopoverParentWindow.h */,
-				0393275A131F62780007496E /* INPopoverParentWindow.m */,
-			);
-			name = INPopoverController;
-			path = ../..;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -155,10 +167,12 @@
 				03932724131F613D0007496E /* Sources */,
 				03932725131F613D0007496E /* Frameworks */,
 				03932726131F613D0007496E /* Resources */,
+				03657F2C187A09C300C969BA /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				03657F2A187A09BA00C969BA /* PBXTargetDependency */,
 			);
 			name = PopoverSampleApp;
 			productName = PopoverSampleApp;
@@ -183,12 +197,28 @@
 			mainGroup = 0393271D131F613D0007496E;
 			productRefGroup = 03932729131F613D0007496E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 03657F24187A09A000C969BA /* Products */;
+					ProjectRef = 03657F23187A09A000C969BA /* INPopoverController.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				03932727131F613D0007496E /* PopoverSampleApp */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		03657F28187A09A000C969BA /* INPopoverController.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = INPopoverController.framework;
+			remoteRef = 03657F27187A09A000C969BA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		03932726131F613D0007496E /* Resources */ = {
@@ -212,14 +242,18 @@
 				0393273A131F613D0007496E /* main.m in Sources */,
 				03932740131F613D0007496E /* PopoverSampleAppAppDelegate.m in Sources */,
 				0393274C131F61590007496E /* ContentViewController.m in Sources */,
-				03932756131F62420007496E /* INPopoverController.m in Sources */,
-				03932757131F62420007496E /* INPopoverWindow.m in Sources */,
-				03932758131F62420007496E /* INPopoverWindowFrame.m in Sources */,
-				0393275B131F62780007496E /* INPopoverParentWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03657F2A187A09BA00C969BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = INPopoverController;
+			targetProxy = 03657F29187A09BA00C969BA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		03932735131F613D0007496E /* InfoPlist.strings */ = {
@@ -291,6 +325,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PopoverSampleApp/PopoverSampleApp-Prefix.pch";
 				INFOPLIST_FILE = "PopoverSampleApp/PopoverSampleApp-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -308,6 +343,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PopoverSampleApp/PopoverSampleApp-Prefix.pch";
 				INFOPLIST_FILE = "PopoverSampleApp/PopoverSampleApp-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
