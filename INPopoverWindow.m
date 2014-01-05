@@ -119,8 +119,10 @@
 	[anim setValues:[NSArray arrayWithObjects:[NSValue valueWithRect:startFrame], [NSValue valueWithRect:overshootFrame], [NSValue valueWithRect:endFrame], nil]];
 	[_zoomWindow setAnimations:[NSDictionary dictionaryWithObjectsAndKeys:anim, @"frame", nil]];
 	
+	[NSAnimationContext beginGrouping];
 	[[_zoomWindow animator] setAlphaValue:1.0];
 	[[_zoomWindow animator] setFrame:endFrame display:YES];
+	[NSAnimationContext endGrouping];
 }
 
 - (void)dismissAnimated
@@ -174,9 +176,10 @@
 	NSImage *image = [[[NSImage alloc] initWithSize:frame.size] autorelease];
 #endif
 	[self displayIfNeeded];	// refresh view
-	[image lockFocus];
-	NSCopyBits([self gState], NSMakeRect(0.0, 0.0, frame.size.width, frame.size.height), NSZeroPoint);
-	[image unlockFocus];
+	NSView *view = self.contentView;
+	NSBitmapImageRep *imageRep = [view bitmapImageRepForCachingDisplayInRect:view.bounds];
+	[view cacheDisplayInRect:view.bounds toBitmapImageRep:imageRep];
+	[image addRepresentation:imageRep];
 	
 	// create zoom window
 	NSWindow *zoomWindow = [[NSWindow alloc] initWithContentRect:rect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
