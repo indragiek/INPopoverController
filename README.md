@@ -1,9 +1,9 @@
-What is INPopoverController?
-====================
+## INPopoverController?
+### Open source OS X popover implementation
 
-It's no secret that a certain upcoming of Mac OS X has an API for displaying popovers. That said, developers who want to support older versions of OS X (like me) are unable to use that API without breaking backward compatibility. So I developed this class that will allow developers to easily add popovers into their applications and also have it be compatible with older versions of OS X (tested on 10.6, should work for 10.5 as well). I've included a sample app to demonstrate how to use INPopoverController:
+OS X 10.7 introduced the `NSPopover` class for displaying popover windows. That said, developers who want to support older versions of OS X (like me) are unable to use that API without breaking backward compatibility. So I developed this class that will allow developers to easily add popovers into their applications and also have it be compatible with older versions of OS X (tested on 10.6, should work for 10.5 as well). I've included a sample app to demonstrate how to use INPopoverController:
 
-![INPopoverController](http://i52.tinypic.com/2v9dl5c.png)
+![INPopoverController](https://raw.github.com/indragiek/INPopoverController/master/screenshot.png)
 
 Features:
 
@@ -14,8 +14,7 @@ Features:
 - Popover can anchor to a view
 - Customizable popover behaviour (close when key status is lost, when application resigns active)
 
-How to use it
-====================
+### How to use it
 
 The headers are well documented (and I've also included a sample app) so it should be simple to figure out how to use it. There are `color`, `borderColor`, and `borderWidth` properties to customize the appearance of the popover. There are also some hard-coded defines in the `INPopoverControllerDefines.h` file which can be changed to further customize the appearance. The `closesWhenPopoverResignsKey` and `closesWhenApplicationBecomesInactive` properties can be used to control the behaviour of the popover. Everything else should be pretty much self explanatory. 
 
@@ -25,12 +24,12 @@ If you want to completely customize the drawing of the popover, you can edit the
 
 **Create a new issue if you have trouble getting it working, or if you want to request new features**
 
-Who am I?
-====================
+### Contact
 
-I'm Indragie Karunaratne, a 16 year old Mac OS X and iOS Developer from Edmonton AB, Canada. Visit [my website](http://indragie.com) to check out my work, or to get in touch with me.
+* Indragie Karunaratne
+* [@indragie](http://twitter.com/indragie)
+* [http://indragie.com](http://indragie.com)
 
-Licensing
-====================
+### Licensing
 
 INPopoverController is licensed under the [BSD license](http://www.opensource.org/licenses/bsd-license.php).
