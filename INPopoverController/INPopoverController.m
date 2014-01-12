@@ -50,7 +50,7 @@
 {
 	if (self.popoverIsVisible) { return; } // If it's already visible, do nothing
 	NSWindow *mainWindow = [positionView window];
-	[self _setPositionView:positionView];
+	_positionView = positionView;
 	_viewRect = rect;
 	_screenRect = [positionView convertRect:rect toView:nil]; // Convert the rect to window coordinates
 	_screenRect.origin = [mainWindow convertBaseToScreen:_screenRect.origin]; // Convert window coordinates to screen coordinates
@@ -150,18 +150,6 @@
 	return windowFrame;
 }
 
-#pragma mark -
-#pragma mark Memory Management
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	[_contentViewController release];
-	[_popoverWindow release];
-	[super dealloc];
-}
-#endif
-
 - (void) animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
 {
 #pragma unused(animation)
@@ -222,12 +210,7 @@
 {
 	if (_contentViewController != newContentViewController) {
 		[_popoverWindow setPopoverContentView:nil]; // Clear the content view
-#if __has_feature(objc_arc)
         _contentViewController = newContentViewController;
-#else
-		[_contentViewController release];
-		_contentViewController = [newContentViewController retain];
-#endif
 		NSView *contentView = [_contentViewController view];
 		self.contentSize = [contentView frame].size;
 		[_popoverWindow setPopoverContentView:contentView];
@@ -241,22 +224,9 @@
 	NSRect adjustedRect = [self popoverFrameWithSize:newContentSize andArrowDirection:self.arrowDirection];
 	[_popoverWindow setFrame:adjustedRect display:YES animate:self.animates];
 }
-	
-#pragma mark -
 
-- (void)_setPositionView:(NSView *)newPositionView
+- (void)_setArrowDirection:(INPopoverArrowDirection)direction
 {
-#if __has_feature(objc_arc)
-    _positionView = newPositionView;
-#else
-	if (_positionView != newPositionView) {
-		[_positionView release];
-		_positionView = [newPositionView retain];
-	}
-#endif
-}
-
-- (void)_setArrowDirection:(INPopoverArrowDirection)direction {
 	_popoverWindow.frameView.arrowDirection = direction; 
 }
 
@@ -366,8 +336,8 @@
 	[positionWindow makeKeyAndOrderFront:nil];
 	// Clear all the ivars
 	[self _setArrowDirection:INPopoverArrowDirectionUndefined];
-	[self _setPositionView:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	_positionView = nil;
 	_screenRect = NSZeroRect;
 	_viewRect = NSZeroRect;
     
@@ -378,15 +348,10 @@
 - (void)_callDelegateMethod:(SEL)selector
 {
 	if ([self.delegate respondsToSelector:selector]) {
-
-#if __has_feature(objc_arc)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 		[self.delegate performSelector:selector withObject:self];
 #pragma clang diagnostic pop
-#else
-		[self.delegate performSelector:selector withObject:self];
-#endif
 	}
 }
 

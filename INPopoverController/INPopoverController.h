@@ -15,11 +15,7 @@
 #pragma mark Properties
 
 /** The delegate of the INPopoverController object (should conform to the INPopoverControllerDelegate protocol) **/
-#if __has_feature(objc_arc)
-@property (nonatomic, unsafe_unretained) id<INPopoverControllerDelegate> delegate;
-#else
 @property (nonatomic, assign) id<INPopoverControllerDelegate> delegate;
-#endif
 
 /** The background color of the popover. Default value is [NSColor blackColor] with an alpha value of 0.8. Changes to this value are not animated. **/
 @property (nonatomic, retain) NSColor *color;
