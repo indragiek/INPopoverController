@@ -16,7 +16,7 @@
 @class INPopoverController;
 @interface INPopoverWindow : NSWindow
 @property (nonatomic, readonly) INPopoverWindowFrame *frameView; // Equivalent to contentView
-@property (nonatomic, retain) NSView *popoverContentView;
+@property (nonatomic, strong) NSView *popoverContentView;
 
 - (void)presentWithPopoverController:(INPopoverController *)popoverController;
 - (void)dismissAnimated;
