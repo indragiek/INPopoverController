@@ -15,5 +15,7 @@
 @property (nonatomic, strong) NSColor *borderColor;
 @property (nonatomic, strong) NSColor *topHighlightColor;
 @property (nonatomic, assign) CGFloat borderWidth;
+@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, assign) NSSize arrowSize;
 @property (nonatomic, assign) INPopoverArrowDirection arrowDirection;
 @end

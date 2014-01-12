@@ -35,12 +35,14 @@
 - (NSRect)contentRectForFrameRect:(NSRect)windowFrame
 {
 	windowFrame.origin = NSZeroPoint;
-	return NSInsetRect(windowFrame, INPOPOVER_ARROW_HEIGHT, INPOPOVER_ARROW_HEIGHT);
+	const NSSize arrowSize = self.frameView.arrowSize;
+	return NSInsetRect(windowFrame, arrowSize.width, arrowSize.height);
 }
 
 - (NSRect)frameRectForContentRect:(NSRect)contentRect
 {
-	return NSInsetRect(contentRect, -INPOPOVER_ARROW_HEIGHT, -INPOPOVER_ARROW_HEIGHT);
+	const NSSize arrowSize = self.frameView.arrowSize;
+	return NSInsetRect(contentRect, -arrowSize.width, -arrowSize.height);
 }
 
 // Allow the popover to become the key window
