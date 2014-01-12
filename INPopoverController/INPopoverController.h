@@ -68,7 +68,7 @@
  @param viewController the content view controller
  @returns a new instance of INPopoverController
  */
-- (id)initWithContentViewController:(NSViewController*)viewController;
+- (id)initWithContentViewController:(NSViewController *)viewController;
 
 /**
  Displays the popover.
@@ -77,7 +77,7 @@
  @param direction the prefered direction at which the arrow will point. There is no guarantee that this will be the actual arrow direction, depending on whether the screen is able to accomodate the popover in that position.
  @param anchors Whether the popover binds to the frame of the positionView. This means that if the positionView is resized or moved, the popover will be repositioned according to the point at which it was originally placed. This also means that if the positionView goes off screen, the popover will be automatically closed. **/
 
-- (void)presentPopoverFromRect:(NSRect)rect inView:(NSView*)positionView preferredArrowDirection:(INPopoverArrowDirection)direction anchorsToPositionView:(BOOL)anchors;
+- (void)presentPopoverFromRect:(NSRect)rect inView:(NSView *)positionView preferredArrowDirection:(INPopoverArrowDirection)direction anchorsToPositionView:(BOOL)anchors;
 
 /** 
  Recalculates the best arrow direction for the current window position and resets the arrow direction. The change will not be animated. **/
@@ -111,29 +111,29 @@
  @param popover the @class INPopoverController object that is controlling the popover
  @returns whether the popover should close or not
  */
-- (BOOL)popoverShouldClose:(INPopoverController*)popover;
+- (BOOL)popoverShouldClose:(INPopoverController *)popover;
 
 /**
  Invoked right before the popover shows on screen
  @param popover the @class INPopoverController object that is controlling the popover
  */
-- (void)popoverWillShow:(INPopoverController*)popover;
+- (void)popoverWillShow:(INPopoverController *)popover;
 
 /**
  Invoked right after the popover shows on screen
  @param popover the @class INPopoverController object that is controlling the popover
  */
-- (void)popoverDidShow:(INPopoverController*)popover;
+- (void)popoverDidShow:(INPopoverController *)popover;
 
 /**
  Invoked right before the popover closes
  @param popover the @class INPopoverController object that is controlling the popover
  */
-- (void)popoverWillClose:(INPopoverController*)popover;
+- (void)popoverWillClose:(INPopoverController *)popover;
 
 /**
  Invoked right before the popover closes
  @param popover the @class INPopoverController object that is controlling the popover
  */
-- (void)popoverDidClose:(INPopoverController*)popover;
+- (void)popoverDidClose:(INPopoverController *)popover;
 @end
