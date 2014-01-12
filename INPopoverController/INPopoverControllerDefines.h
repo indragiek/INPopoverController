@@ -12,7 +12,6 @@ enum {
 	INPopoverArrowDirectionUp = NSMaxYEdge,
 	INPopoverArrowDirectionDown = NSMinYEdge
 };
-
 typedef NSRectEdge INPopoverArrowDirection;
 
 /** The arrow height **/ 

@@ -17,11 +17,10 @@
 // A lot of this code was adapted from the following article:
 // <http://cocoawithlove.com/2008/12/drawing-custom-window-on-mac-os-x.html>
 
-@interface INPopoverWindow ()
-- (NSWindow *)_zoomWindowWithRect:(NSRect)rect;
-@end
-
-@implementation INPopoverWindow
+@implementation INPopoverWindow  {
+	NSView *_popoverContentView;
+	NSWindow *_zoomWindow;
+}
 
 // Borderless, transparent window
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation
@@ -62,7 +61,7 @@
 	return [super isVisible] || [_zoomWindow isVisible];
 }
 
-- (INPopoverWindowFrame*)frameView
+- (INPopoverWindowFrame *)frameView
 {
 	return (INPopoverWindowFrame*)[self contentView];
 }

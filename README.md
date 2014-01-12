@@ -1,7 +1,7 @@
 ## INPopoverController
 ### Open source OS X popover implementation
 
-OS X 10.7 introduced the `NSPopover` class for displaying popover windows. That said, developers who want to support older versions of OS X (like me) are unable to use that API without breaking backward compatibility. So I developed this class that will allow developers to easily add popovers into their applications and also have it be compatible with older versions of OS X (tested on 10.6, should work for 10.5 as well). I've included a sample app to demonstrate how to use INPopoverController:
+OS X 10.7 introduced the `NSPopover` class for displaying popover windows. That said, developers who want to support older versions of OS X (like me) are unable to use that API without breaking backward compatibility. So I developed this class that will allow developers to easily add popovers into their applications and also have it be compatible with older versions of OS X. I've included a sample app to demonstrate how to use INPopoverController:
 
 ![INPopoverController](https://raw.github.com/indragiek/INPopoverController/master/screenshot.png)
 
