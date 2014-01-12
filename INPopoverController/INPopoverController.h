@@ -25,10 +25,16 @@
 @property (nonatomic, strong) NSColor *topHighlightColor;
 
 /** The width of the popover border, drawn using borderColor. Default value: 0.0 (no border). Changes to this value are not animated. **/
-@property (nonatomic) CGFloat borderWidth;
+@property (nonatomic, assign) CGFloat borderWidth;
+
+/** Corner radius of the popover window. Default value: 4. Changes to this value are not animated. **/
+@property (nonatomic, assign) CGFloat cornerRadius;
+
+/** The size of the popover arrow. Default value: {23, 12}. Changes to this value are not animated. **/
+@property (nonatomic, assign) NSSize arrowSize;
 
 /** The current arrow direction of the popover. If the popover has never been displayed, then this will return INPopoverArrowDirectionUndefined */
-@property (readonly) INPopoverArrowDirection arrowDirection;
+@property (nonatomic, assign, readonly) INPopoverArrowDirection arrowDirection;
 
 /** The size of the content of the popover. This is automatically set to contentViewController's size when the view controller is set, but can be modified. Changes to this value are animated when animates is set to YES **/
 @property (nonatomic, assign) NSSize contentSize;
@@ -46,13 +52,13 @@
 @property (nonatomic, strong) NSViewController *contentViewController;
 
 /** The view that the currently displayed popover is positioned relative to. If there is no popover being displayed, this returns nil. **/
-@property (readonly) NSView *positionView;
+@property (nonatomic, strong, readonly) NSView *positionView;
 
 /** The window of the popover **/
-@property (readonly) NSWindow *popoverWindow;
+@property (nonatomic, strong, readonly) NSWindow *popoverWindow;
 
 /** Whether the popover is currently visible or not **/
-@property (readonly) BOOL popoverIsVisible;
+@property (nonatomic, assign, readonly) BOOL popoverIsVisible;
 
 #pragma mark -
 #pragma mark Methods

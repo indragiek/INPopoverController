@@ -187,6 +187,10 @@
 
 - (NSColor *)topHighlightColor { return _popoverWindow.frameView.topHighlightColor; }
 
+- (CGFloat)cornerRadius { return _popoverWindow.frameView.cornerRadius; }
+
+- (NSSize)arrowSize { return _popoverWindow.frameView.arrowSize; }
+
 - (INPopoverArrowDirection)arrowDirection { return _popoverWindow.frameView.arrowDirection; }
 
 - (NSView *)contentView { return [_popoverWindow popoverContentView]; }
@@ -203,6 +207,10 @@
 - (void)setBorderColor:(NSColor *)newBorderColor { _popoverWindow.frameView.borderColor = newBorderColor; }
 
 - (void)setTopHighlightColor:(NSColor *)newTopHighlightColor { _popoverWindow.frameView.topHighlightColor = newTopHighlightColor; }
+
+- (void)setCornerRadius:(CGFloat)cornerRadius { _popoverWindow.frameView.cornerRadius = cornerRadius; }
+
+- (void)setArrowSize:(NSSize)arrowSize { _popoverWindow.frameView.arrowSize = arrowSize; }
 
 - (void)setContentViewController:(NSViewController *)newContentViewController
 {

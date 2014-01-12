@@ -9,11 +9,11 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-	self = [super initWithFrame:frame];
-	if (self) {
-		// Set some default values
-		self.arrowDirection = INPopoverArrowDirectionLeft;
-		self.color = [NSColor colorWithCalibratedWhite:0.0 alpha:0.8];
+	if ((self = [super initWithFrame:frame])) {
+		_color = [NSColor colorWithCalibratedWhite:0.0 alpha:0.8];
+		_cornerRadius = 4.0;
+		_arrowSize = NSMakeSize(23.0, 12.0);
+		_arrowDirection = INPopoverArrowDirectionLeft;
 	}
 	return self;
 }
@@ -21,8 +21,9 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     NSRect bounds = [self bounds];
-    if ( ( (int)self.borderWidth % 2 ) == 1) // Remove draw glitch on odd border width
-        bounds = NSInsetRect(bounds, 0.5f, 0.5f);
+    if (((NSUInteger)self.borderWidth % 2) == 1) { // Remove draw glitch on odd border width
+        bounds = NSInsetRect(bounds, 0.5, 0.5);
+	}
     
 	NSBezierPath *path = [self _popoverBezierPathWithRect:bounds];
 	[self.color set];
@@ -32,15 +33,19 @@
 	[self.borderColor set];
 	[path stroke];
 	
+	const CGFloat arrowWidth = self.arrowSize.width;
+	const CGFloat arrowHeight = self.arrowSize.height;
+	const CGFloat radius = self.cornerRadius;
+	
 	if (self.topHighlightColor) {
 		[self.topHighlightColor set];
-		NSRect bounds = NSInsetRect([self bounds], INPOPOVER_ARROW_HEIGHT, INPOPOVER_ARROW_HEIGHT);
-		NSRect lineRect = NSMakeRect(floor(NSMinX(bounds) + (INPOPOVER_CORNER_RADIUS / 2.0)), NSMaxY(bounds) - self.borderWidth - 1, NSWidth(bounds) - INPOPOVER_CORNER_RADIUS, 1.0);
+		NSRect bounds = NSInsetRect([self bounds], arrowHeight, arrowHeight);
+		NSRect lineRect = NSMakeRect(floor(NSMinX(bounds) + (radius / 2.0)), NSMaxY(bounds) - self.borderWidth - 1, NSWidth(bounds) - radius, 1.0);
 		
 		if (self.arrowDirection == INPopoverArrowDirectionUp) {
-			CGFloat width = floor((lineRect.size.width / 2.0) - (INPOPOVER_ARROW_WIDTH / 2.0));
+			CGFloat width = floor((lineRect.size.width / 2.0) - (arrowWidth / 2.0));
 			NSRectFill(NSMakeRect(lineRect.origin.x, lineRect.origin.y, width, lineRect.size.height));
-			NSRectFill(NSMakeRect(floor(lineRect.origin.x + (lineRect.size.width / 2.0) + (INPOPOVER_ARROW_WIDTH / 2.0)), lineRect.origin.y, width, lineRect.size.height));
+			NSRectFill(NSMakeRect(floor(lineRect.origin.x + (lineRect.size.width / 2.0) + (arrowWidth / 2.0)), lineRect.origin.y, width, lineRect.size.height));
 		} else {
 			NSRectFill(lineRect);
 		}
@@ -52,13 +57,15 @@
 
 - (NSBezierPath *)_popoverBezierPathWithRect:(NSRect)aRect
 {
-	CGFloat radius = INPOPOVER_CORNER_RADIUS;
-	CGFloat inset = radius + INPOPOVER_ARROW_HEIGHT;
-	NSRect drawingRect = NSInsetRect(aRect, inset, inset);
-	CGFloat minX = NSMinX(drawingRect);
-	CGFloat maxX = NSMaxX(drawingRect);
-	CGFloat minY = NSMinY(drawingRect);
-	CGFloat maxY = NSMaxY(drawingRect);
+	const CGFloat radius = self.cornerRadius;
+	const CGFloat arrowWidth = self.arrowSize.width;
+	const CGFloat arrowHeight = self.arrowSize.height;
+	const CGFloat inset = radius + arrowHeight;
+	const NSRect drawingRect = NSInsetRect(aRect, inset, inset);
+	const CGFloat minX = NSMinX(drawingRect);
+	const CGFloat maxX = NSMaxX(drawingRect);
+	const CGFloat minY = NSMinY(drawingRect);
+	const CGFloat maxY = NSMaxY(drawingRect);
 	
 	NSBezierPath *path = [NSBezierPath bezierPath];
 	[path setLineJoinStyle:NSRoundLineJoinStyle];
@@ -68,9 +75,9 @@
 	if (self.arrowDirection == INPopoverArrowDirectionDown) {
 		CGFloat midX = NSMidX(drawingRect);
 		NSPoint points[3];
-		points[0] = NSMakePoint(floor(midX - (INPOPOVER_ARROW_WIDTH / 2.0)), minY - radius); // Starting point
-		points[1] = NSMakePoint(floor(midX), points[0].y - INPOPOVER_ARROW_HEIGHT); // Arrow tip
-		points[2] = NSMakePoint(floor(midX + (INPOPOVER_ARROW_WIDTH / 2.0)), points[0].y); // Ending point
+		points[0] = NSMakePoint(floor(midX - (arrowWidth / 2.0)), minY - radius); // Starting point
+		points[1] = NSMakePoint(floor(midX), points[0].y - arrowHeight); // Arrow tip
+		points[2] = NSMakePoint(floor(midX + (arrowWidth / 2.0)), points[0].y); // Ending point
 		[path appendBezierPathWithPoints:points count:3];
 	}
 	// Bottom right corner
@@ -78,9 +85,9 @@
 	if (self.arrowDirection == INPopoverArrowDirectionRight) {
 		CGFloat midY = NSMidY(drawingRect);
 		NSPoint points[3];
-		points[0] = NSMakePoint(maxX + radius, floor(midY - (INPOPOVER_ARROW_WIDTH / 2.0)));
-		points[1] = NSMakePoint(points[0].x + INPOPOVER_ARROW_HEIGHT, floor(midY));
-		points[2] = NSMakePoint(points[0].x, floor(midY + (INPOPOVER_ARROW_WIDTH / 2.0)));
+		points[0] = NSMakePoint(maxX + radius, floor(midY - (arrowWidth / 2.0)));
+		points[1] = NSMakePoint(points[0].x + arrowHeight, floor(midY));
+		points[2] = NSMakePoint(points[0].x, floor(midY + (arrowWidth / 2.0)));
 		[path appendBezierPathWithPoints:points count:3];
 	}
 	// Top right corner
@@ -88,9 +95,9 @@
 	if (self.arrowDirection == INPopoverArrowDirectionUp) {
 		CGFloat midX = NSMidX(drawingRect);
 		NSPoint points[3];
-		points[0] = NSMakePoint(floor(midX + (INPOPOVER_ARROW_WIDTH / 2.0)), maxY + radius);
-		points[1] = NSMakePoint(floor(midX), points[0].y + INPOPOVER_ARROW_HEIGHT);
-		points[2] = NSMakePoint(floor(midX - (INPOPOVER_ARROW_WIDTH / 2.0)), points[0].y);
+		points[0] = NSMakePoint(floor(midX + (arrowWidth / 2.0)), maxY + radius);
+		points[1] = NSMakePoint(floor(midX), points[0].y + arrowHeight);
+		points[2] = NSMakePoint(floor(midX - (arrowWidth / 2.0)), points[0].y);
 		[path appendBezierPathWithPoints:points count:3];
 	}
 	// Top left corner
@@ -98,9 +105,9 @@
 	if (self.arrowDirection == INPopoverArrowDirectionLeft) {
 		CGFloat midY = NSMidY(drawingRect);
 		NSPoint points[3];
-		points[0] = NSMakePoint(minX - radius, floor(midY + (INPOPOVER_ARROW_WIDTH / 2.0)));
-		points[1] = NSMakePoint(points[0].x - INPOPOVER_ARROW_HEIGHT, floor(midY));
-		points[2] = NSMakePoint(points[0].x, floor(midY - (INPOPOVER_ARROW_WIDTH / 2.0)));
+		points[0] = NSMakePoint(minX - radius, floor(midY + (arrowWidth / 2.0)));
+		points[1] = NSMakePoint(points[0].x - arrowHeight, floor(midY));
+		points[2] = NSMakePoint(points[0].x, floor(midY - (arrowWidth / 2.0)));
 		[path appendBezierPathWithPoints:points count:3];
 	}
 	[path closePath];
@@ -128,18 +135,35 @@
 	}
 }
 
-- (void)setArrowDirection:(INPopoverArrowDirection)newArrowDirection
-{
-	if (_arrowDirection != newArrowDirection) {
-		_arrowDirection = newArrowDirection;
-		[self setNeedsDisplay:YES];
-	}
-}
 
 - (void)setBorderWidth:(CGFloat)newBorderWidth
 {
 	if (_borderWidth != newBorderWidth) {
 		_borderWidth = newBorderWidth;
+		[self setNeedsDisplay:YES];
+	}
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius
+{
+	if (_cornerRadius != cornerRadius) {
+		_cornerRadius = cornerRadius;
+		[self setNeedsDisplay:YES];
+	}
+}
+
+- (void)setArrowSize:(NSSize)arrowSize
+{
+	if (!NSEqualSizes(_arrowSize, arrowSize)) {
+		_arrowSize = arrowSize;
+		[self setNeedsDisplay:YES];
+	}
+}
+
+- (void)setArrowDirection:(INPopoverArrowDirection)newArrowDirection
+{
+	if (_arrowDirection != newArrowDirection) {
+		_arrowDirection = newArrowDirection;
 		[self setNeedsDisplay:YES];
 	}
 }
