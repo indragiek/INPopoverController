@@ -141,11 +141,11 @@
 				0393273F131F613D0007496E /* PopoverSampleAppAppDelegate.m */,
 				03932749131F61590007496E /* ContentViewController.h */,
 				0393274A131F61590007496E /* ContentViewController.m */,
+				0391A4FD18822FAA007D32D5 /* AlphaColorWell.h */,
+				0391A4FE18822FAA007D32D5 /* AlphaColorWell.m */,
 				03932741131F613D0007496E /* MainMenu.xib */,
 				0393274B131F61590007496E /* ContentViewController.xib */,
 				03932733131F613D0007496E /* Supporting Files */,
-				0391A4FD18822FAA007D32D5 /* AlphaColorWell.h */,
-				0391A4FE18822FAA007D32D5 /* AlphaColorWell.m */,
 			);
 			path = PopoverSampleApp;
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 		0393271F131F613D0007496E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = "PCWiz Computer";
+				ORGANIZATIONNAME = "Indragie Karunaratne";
 			};
 			buildConfigurationList = 03932722131F613D0007496E /* Build configuration list for PBXProject "PopoverSampleApp" */;
 			compatibilityVersion = "Xcode 3.2";
