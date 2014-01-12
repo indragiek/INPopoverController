@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		03657F2B187A09BE00C969BA /* INPopoverController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03657F28187A09A000C969BA /* INPopoverController.framework */; };
 		03657F2D187A09C900C969BA /* INPopoverController.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03657F28187A09A000C969BA /* INPopoverController.framework */; };
+		0391A4FF18822FAA007D32D5 /* AlphaColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0391A4FE18822FAA007D32D5 /* AlphaColorWell.m */; };
 		0393272D131F613D0007496E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0393272C131F613D0007496E /* Cocoa.framework */; };
 		03932737131F613D0007496E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03932735131F613D0007496E /* InfoPlist.strings */; };
 		0393273A131F613D0007496E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03932739131F613D0007496E /* main.m */; };
@@ -52,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		03657F23187A09A000C969BA /* INPopoverController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = INPopoverController.xcodeproj; path = ../../INPopoverController.xcodeproj; sourceTree = "<group>"; };
+		0391A4FD18822FAA007D32D5 /* AlphaColorWell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlphaColorWell.h; sourceTree = "<group>"; };
+		0391A4FE18822FAA007D32D5 /* AlphaColorWell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlphaColorWell.m; sourceTree = "<group>"; };
 		03932728131F613D0007496E /* PopoverSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopoverSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0393272C131F613D0007496E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0393272F131F613D0007496E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -141,6 +144,8 @@
 				03932741131F613D0007496E /* MainMenu.xib */,
 				0393274B131F61590007496E /* ContentViewController.xib */,
 				03932733131F613D0007496E /* Supporting Files */,
+				0391A4FD18822FAA007D32D5 /* AlphaColorWell.h */,
+				0391A4FE18822FAA007D32D5 /* AlphaColorWell.m */,
 			);
 			path = PopoverSampleApp;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0391A4FF18822FAA007D32D5 /* AlphaColorWell.m in Sources */,
 				0393273A131F613D0007496E /* main.m in Sources */,
 				03932740131F613D0007496E /* PopoverSampleAppAppDelegate.m in Sources */,
 				0393274C131F61590007496E /* ContentViewController.m in Sources */,
