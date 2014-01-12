@@ -7,13 +7,14 @@
 #import "INPopoverControllerDefines.h"
 
 @protocol INPopoverControllerDelegate;
+
 @interface INPopoverController : NSObject
 
 #pragma mark -
 #pragma mark Properties
 
 /** The delegate of the INPopoverController object (should conform to the INPopoverControllerDelegate protocol) **/
-@property (nonatomic, assign) id<INPopoverControllerDelegate> delegate;
+@property (nonatomic, assign) id <INPopoverControllerDelegate> delegate;
 
 /** The background color of the popover. Default value is [NSColor blackColor] with an alpha value of 0.8. Changes to this value are not animated. **/
 @property (nonatomic, strong) NSColor *color;

@@ -20,28 +20,28 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSRect bounds = [self bounds];
-    if (((NSUInteger)self.borderWidth % 2) == 1) { // Remove draw glitch on odd border width
-        bounds = NSInsetRect(bounds, 0.5, 0.5);
+	NSRect bounds = [self bounds];
+	if (((NSUInteger) self.borderWidth % 2) == 1) { // Remove draw glitch on odd border width
+		bounds = NSInsetRect(bounds, 0.5, 0.5);
 	}
-    
+
 	NSBezierPath *path = [self _popoverBezierPathWithRect:bounds];
 	[self.color set];
 	[path fill];
-	
+
 	[path setLineWidth:self.borderWidth];
 	[self.borderColor set];
 	[path stroke];
-	
+
 	const CGFloat arrowWidth = self.arrowSize.width;
 	const CGFloat arrowHeight = self.arrowSize.height;
 	const CGFloat radius = self.cornerRadius;
-	
+
 	if (self.topHighlightColor) {
 		[self.topHighlightColor set];
 		NSRect bounds = NSInsetRect([self bounds], arrowHeight, arrowHeight);
 		NSRect lineRect = NSMakeRect(floor(NSMinX(bounds) + (radius / 2.0)), NSMaxY(bounds) - self.borderWidth - 1, NSWidth(bounds) - radius, 1.0);
-		
+
 		if (self.arrowDirection == INPopoverArrowDirectionUp) {
 			CGFloat width = floor((lineRect.size.width / 2.0) - (arrowWidth / 2.0));
 			NSRectFill(NSMakeRect(lineRect.origin.x, lineRect.origin.y, width, lineRect.size.height));
@@ -66,10 +66,10 @@
 	const CGFloat maxX = NSMaxX(drawingRect);
 	const CGFloat minY = NSMinY(drawingRect);
 	const CGFloat maxY = NSMaxY(drawingRect);
-	
+
 	NSBezierPath *path = [NSBezierPath bezierPath];
 	[path setLineJoinStyle:NSRoundLineJoinStyle];
-	
+
 	// Bottom left corner
 	[path appendBezierPathWithArcWithCenter:NSMakePoint(minX, minY) radius:radius startAngle:180.0 endAngle:270.0];
 	if (self.arrowDirection == INPopoverArrowDirectionDown) {
@@ -111,7 +111,7 @@
 		[path appendBezierPathWithPoints:points count:3];
 	}
 	[path closePath];
-	
+
 	return path;
 }
 
@@ -122,7 +122,7 @@
 - (void)setColor:(NSColor *)newColor
 {
 	if (_color != newColor) {
-        _color = newColor;
+		_color = newColor;
 		[self setNeedsDisplay:YES];
 	}
 }
@@ -130,7 +130,7 @@
 - (void)setBorderColor:(NSColor *)newBorderColor
 {
 	if (_borderColor != newBorderColor) {
-        _borderColor = newBorderColor;
+		_borderColor = newBorderColor;
 		[self setNeedsDisplay:YES];
 	}
 }

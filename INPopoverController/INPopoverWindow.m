@@ -9,13 +9,13 @@
 #import "INPopoverController.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define START_SIZE			NSMakeSize(20, 20)
-#define OVERSHOOT_FACTOR	1.2
+#define START_SIZE            NSMakeSize(20, 20)
+#define OVERSHOOT_FACTOR    1.2
 
 // A lot of this code was adapted from the following article:
 // <http://cocoawithlove.com/2008/12/drawing-custom-window-on-mac-os-x.html>
 
-@implementation INPopoverWindow  {
+@implementation INPopoverWindow {
 	NSView *_popoverContentView;
 	NSWindow *_zoomWindow;
 }
@@ -63,22 +63,22 @@
 
 - (INPopoverWindowFrame *)frameView
 {
-	return (INPopoverWindowFrame*)[self contentView];
+	return (INPopoverWindowFrame *) [self contentView];
 }
 
 - (void)setContentView:(NSView *)aView
 {
-    [self setPopoverContentView:aView];
+	[self setPopoverContentView:aView];
 }
 
 - (void)setPopoverContentView:(NSView *)aView
 {
-	if ([_popoverContentView isEqualTo:aView]) { return; }
+	if ([_popoverContentView isEqualTo:aView]) {return;}
 	NSRect bounds = [self frame];
 	bounds.origin = NSZeroPoint;
 	INPopoverWindowFrame *frameView = [self frameView];
 	if (!frameView) {
-        frameView = [[INPopoverWindowFrame alloc] initWithFrame:bounds];
+		frameView = [[INPopoverWindowFrame alloc] initWithFrame:bounds];
 		[super setContentView:frameView]; // Call on super or there will be infinite loop
 	}
 	if (_popoverContentView) {
@@ -94,21 +94,21 @@
 {
 	if ([self isVisible])
 		return;
-	
+
 	NSRect endFrame = [self frame];
 	NSRect startFrame = [popoverController popoverFrameWithSize:START_SIZE andArrowDirection:self.frameView.arrowDirection];
-	NSRect overshootFrame = [popoverController popoverFrameWithSize:NSMakeSize(endFrame.size.width*OVERSHOOT_FACTOR, endFrame.size.height*OVERSHOOT_FACTOR) andArrowDirection:self.frameView.arrowDirection];
-	
-    _zoomWindow = [self _zoomWindowWithRect:startFrame];
+	NSRect overshootFrame = [popoverController popoverFrameWithSize:NSMakeSize(endFrame.size.width * OVERSHOOT_FACTOR, endFrame.size.height * OVERSHOOT_FACTOR) andArrowDirection:self.frameView.arrowDirection];
+
+	_zoomWindow = [self _zoomWindowWithRect:startFrame];
 	[_zoomWindow setAlphaValue:0.0];
 	[_zoomWindow orderFront:self];
-	
+
 	// configure bounce-out animation
 	CAKeyframeAnimation *anim = [CAKeyframeAnimation animation];
 	[anim setDelegate:self];
 	[anim setValues:[NSArray arrayWithObjects:[NSValue valueWithRect:startFrame], [NSValue valueWithRect:overshootFrame], [NSValue valueWithRect:endFrame], nil]];
 	[_zoomWindow setAnimations:[NSDictionary dictionaryWithObjectsAndKeys:anim, @"frame", nil]];
-	
+
 	[NSAnimationContext beginGrouping];
 	[[_zoomWindow animator] setAlphaValue:1.0];
 	[[_zoomWindow animator] setFrame:endFrame display:YES];
@@ -123,10 +123,10 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-	[self makeKeyAndOrderFront:self];	
+	[self makeKeyAndOrderFront:self];
 	[_zoomWindow close];
 	_zoomWindow = nil;
-	
+
 	// call the animation delegate of the "real" window
 	CAAnimation *windowAnimation = [self animationForKey:@"alphaValue"];
 	[[windowAnimation delegate] animationDidStop:anim finished:flag];
@@ -143,26 +143,25 @@
 	BOOL isOneShot = [self isOneShot];
 	if (isOneShot)
 		[self setOneShot:NO];
-	
-	if ([self windowNumber] <= 0)
-	{
-        // force creation of window device by putting it on-screen. We make it transparent to minimize the chance of visible flicker
+
+	if ([self windowNumber] <= 0) {
+		// force creation of window device by putting it on-screen. We make it transparent to minimize the chance of visible flicker
 		CGFloat alpha = [self alphaValue];
 		[self setAlphaValue:0.0];
 		[self orderBack:self];
 		[self orderOut:self];
 		[self setAlphaValue:alpha];
 	}
-	
+
 	// get window content as image
 	NSRect frame = [self frame];
 	NSImage *image = [[NSImage alloc] initWithSize:frame.size];
-	[self displayIfNeeded];	// refresh view
+	[self displayIfNeeded];    // refresh view
 	NSView *view = self.contentView;
 	NSBitmapImageRep *imageRep = [view bitmapImageRepForCachingDisplayInRect:view.bounds];
 	[view cacheDisplayInRect:view.bounds toBitmapImageRep:imageRep];
 	[image addRepresentation:imageRep];
-	
+
 	// create zoom window
 	NSWindow *zoomWindow = [[NSWindow alloc] initWithContentRect:rect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
 	[zoomWindow setBackgroundColor:[NSColor clearColor]];
@@ -176,13 +175,13 @@
 	[imageView setImage:image];
 	[imageView setImageFrameStyle:NSImageFrameNone];
 	[imageView setImageScaling:NSScaleToFit];
-	[imageView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
-	
+	[imageView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+
 	[zoomWindow setContentView:imageView];
-	
+
 	// reset one shot flag
 	[self setOneShot:isOneShot];
-	
+
 	return zoomWindow;
 }
 
