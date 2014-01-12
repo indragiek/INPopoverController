@@ -5,11 +5,11 @@ OS X 10.7 introduced the `NSPopover` class for displaying popover windows. That 
 
 ![INPopoverController](https://raw.github.com/indragiek/INPopoverController/master/screenshot.png)
 
-Features:
+**Features:**
 
-- Customizable color, border color, and border width (arrow width/height and popover corner radius are also customizable by editing the INPopoverControllerDefines.h file)
-- Autocalculates the best arrow direction depending on screen space and popover position
-- Displays content from a regular NSViewController (can be loaded from a NIB)
+- Customizable color, border color, border width, arrow size, and corner radius.
+- Automatically calculates the best arrow direction depending on screen space and popover position
+- Displays content from a regular `NSViewController` (can be loaded from a NIB)
 - Animation for when the popover appears/disappears and when the content size is changed
 - Popover can anchor to a view
 - Customizable popover behaviour (close when key status is lost, when application resigns active)
