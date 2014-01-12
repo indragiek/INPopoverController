@@ -18,13 +18,13 @@
 @property (nonatomic, assign) id<INPopoverControllerDelegate> delegate;
 
 /** The background color of the popover. Default value is [NSColor blackColor] with an alpha value of 0.8. Changes to this value are not animated. **/
-@property (nonatomic, retain) NSColor *color;
+@property (nonatomic, strong) NSColor *color;
 
 /** Border color to use when drawing a border. Default value: [NSColor blackColor]. Changes to this value are not animated. **/
-@property (nonatomic, retain) NSColor *borderColor;
+@property (nonatomic, strong) NSColor *borderColor;
 
 /** Color to use for drawing a 1px highlight just below the top. Can be nil. Changes to this value are not animated. **/
-@property (nonatomic, retain) NSColor *topHighlightColor;
+@property (nonatomic, strong) NSColor *topHighlightColor;
 
 /** The width of the popover border, drawn using borderColor. Default value: 0.0 (no border). Changes to this value are not animated. **/
 @property (nonatomic) CGFloat borderWidth;
@@ -45,7 +45,7 @@
 @property (nonatomic, assign) BOOL animates;
 
 /** The content view controller from which content is displayed in the popover **/
-@property (nonatomic, retain) NSViewController *contentViewController;
+@property (nonatomic, strong) NSViewController *contentViewController;
 
 /** The view that the currently displayed popover is positioned relative to. If there is no popover being displayed, this returns nil. **/
 @property (readonly) NSView *positionView;
