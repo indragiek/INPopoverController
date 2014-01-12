@@ -32,6 +32,14 @@
 	[self _setInitialPropertyValues];
 }
 
+#pragma mark - 
+#pragma mark - Memory Management
+
+- (void)dealloc
+{
+	_popoverWindow.popoverController = nil;
+}
+
 #pragma mark -
 #pragma mark Public Methods
 
@@ -60,12 +68,11 @@
 
 	// Show the popover
 	[self _callDelegateMethod:@selector(popoverWillShow:)]; // Call the delegate
-	if (self.animates) {
+	if (self.animates && self.animationType != INPopoverAnimationTypeFadeOut) {
 		// Animate the popover in
+		[_popoverWindow presentAnimated];
+	} else {
 		[_popoverWindow setAlphaValue:1.0];
-		[_popoverWindow presentWithPopoverController:self];
-	}
-	else {
 		[mainWindow addChildWindow:_popoverWindow ordered:NSWindowAbove]; // Add the popover as a child window of the main window
 		[_popoverWindow makeKeyAndOrderFront:nil]; // Show the popover
 		[self _callDelegateMethod:@selector(popoverDidShow:)]; // Call the delegate
@@ -113,7 +120,7 @@
 {
 	if (![_popoverWindow isVisible]) {return;}
 	[self _callDelegateMethod:@selector(popoverWillClose:)]; // Call delegate
-	if (self.animates) {
+	if (self.animates && self.animationType != INPopoverAnimationTypeFadeIn) {
 		[_popoverWindow dismissAnimated];
 	} else {
 		[self _closePopoverAndResetVariables];
@@ -288,6 +295,7 @@
 {
 	// Create an empty popover window
 	_popoverWindow = [[INPopoverWindow alloc] initWithContentRect:NSZeroRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+	_popoverWindow.popoverController = self;
 
 	// set defaults like iCal popover
 	self.color = [NSColor colorWithCalibratedWhite:0.94 alpha:0.92];
@@ -296,6 +304,7 @@
 	self.closesWhenPopoverResignsKey = YES;
 	self.closesWhenApplicationBecomesInactive = NO;
 	self.animates = YES;
+	self.animationType = INPopoverAnimationTypePop;
 
 	// create animation to get callback - delegate is set when opening popover to avoid memory cycles
 	CAAnimation *animation = [CABasicAnimation animation];

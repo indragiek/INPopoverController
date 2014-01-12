@@ -49,6 +49,10 @@
 /** Enable or disable animation when showing/closing the popover and changing the content size. Default value: YES */
 @property (nonatomic, assign) BOOL animates;
 
+/* If `animates` is `YES`, this is the animation type to use when showing/closing the popover.
+   Default value: `INPopoverAnimationTypePop` **/
+@property (nonatomic, assign) INPopoverAnimationType animationType;
+
 /** The content view controller from which content is displayed in the popover **/
 @property (nonatomic, strong) NSViewController *contentViewController;
 

@@ -95,14 +95,14 @@
 			isa = PBXGroup;
 			children = (
 				98BA8941143EA04A006F744E /* Supporting Files */,
-				7619A090EED3A0874FFB0542 /* INPopoverController.m */,
-				7619AF3F1F908EC06616FBBA /* INPopoverController.h */,
-				7619AFDD9CA28B629C79B9B7 /* INPopoverWindowFrame.m */,
-				7619A3274F11C96F76F9A2AA /* INPopoverParentWindow.h */,
 				7619A49B8AE793DFA2663E95 /* INPopoverControllerDefines.h */,
-				7619A46EB85527945376718B /* INPopoverWindow.m */,
-				7619AEB4110920D49EB68147 /* INPopoverWindow.h */,
+				7619AF3F1F908EC06616FBBA /* INPopoverController.h */,
+				7619A090EED3A0874FFB0542 /* INPopoverController.m */,
 				7619ABC89C19022487731625 /* INPopoverWindowFrame.h */,
+				7619AFDD9CA28B629C79B9B7 /* INPopoverWindowFrame.m */,
+				7619AEB4110920D49EB68147 /* INPopoverWindow.h */,
+				7619A46EB85527945376718B /* INPopoverWindow.m */,
+				7619A3274F11C96F76F9A2AA /* INPopoverParentWindow.h */,
 				7619A840E914A3391A33BCB2 /* INPopoverParentWindow.m */,
 			);
 			path = INPopoverController;
