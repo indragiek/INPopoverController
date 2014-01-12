@@ -35,7 +35,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (id)initWithContentViewController:(NSViewController* )viewController
+- (id)initWithContentViewController:(NSViewController *)viewController
 {
 	if ((self = [super init])) {
 		[self _setInitialPropertyValues];
@@ -46,7 +46,7 @@
 
 - (void)presentPopoverFromRect:(NSRect)rect inView:(NSView *)positionView preferredArrowDirection:(INPopoverArrowDirection)direction anchorsToPositionView:(BOOL)anchors
 {
-	if (self.popoverIsVisible) { return; } // If it's already visible, do nothing
+	if (self.popoverIsVisible) {return;} // If it's already visible, do nothing
 	NSWindow *mainWindow = [positionView window];
 	_positionView = positionView;
 	_viewRect = rect;
@@ -57,22 +57,20 @@
 	NSRect windowFrame = [self popoverFrameWithSize:self.contentSize andArrowDirection:calculatedDirection]; // Calculate the window frame based on the arrow direction
 	[_popoverWindow setFrame:windowFrame display:YES]; // Se the frame of the window
 	[[_popoverWindow animationForKey:@"alphaValue"] setDelegate:self];
-	
+
 	// Show the popover
 	[self _callDelegateMethod:@selector(popoverWillShow:)]; // Call the delegate
-	if (self.animates)
-	{
+	if (self.animates) {
 		// Animate the popover in
 		[_popoverWindow setAlphaValue:1.0];
 		[_popoverWindow presentWithPopoverController:self];
 	}
-	else
-	{
+	else {
 		[mainWindow addChildWindow:_popoverWindow ordered:NSWindowAbove]; // Add the popover as a child window of the main window
 		[_popoverWindow makeKeyAndOrderFront:nil]; // Show the popover
 		[self _callDelegateMethod:@selector(popoverDidShow:)]; // Call the delegate
 	}
-	
+
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	if (anchors) {  // If the anchors option is enabled, register for frame change notifications
 		[nc addObserver:self selector:@selector(_positionViewFrameChanged:) name:NSViewFrameDidChangeNotification object:self.positionView];
@@ -96,8 +94,8 @@
 
 - (IBAction)closePopover:(id)sender
 {
-	if (![_popoverWindow isVisible]) { return; }
-	if ([sender isKindOfClass:[NSNotification class]] && [[(NSNotification*)sender name] isEqualToString:NSWindowDidResignKeyNotification]) {
+	if (![_popoverWindow isVisible]) {return;}
+	if ([sender isKindOfClass:[NSNotification class]] && [[(NSNotification *) sender name] isEqualToString:NSWindowDidResignKeyNotification]) {
 		// ignore "resign key" notification sent when app becomes inactive unless closesWhenApplicationBecomesInactive is enabled
 		if (!self.closesWhenApplicationBecomesInactive && ![NSApp isActive])
 			return;
@@ -105,14 +103,14 @@
 	BOOL close = YES;
 	// Check to see if the delegate has implemented the -popoverShouldClose: method
 	if ([self.delegate respondsToSelector:@selector(popoverShouldClose:)]) {
-		close = [self.delegate popoverShouldClose:self]; 
+		close = [self.delegate popoverShouldClose:self];
 	}
-	if (close) { [self forceClosePopover:nil]; }
+	if (close) {[self forceClosePopover:nil];}
 }
 
 - (IBAction)forceClosePopover:(id)sender
 {
-	if (![_popoverWindow isVisible]) { return; }
+	if (![_popoverWindow isVisible]) {return;}
 	[self _callDelegateMethod:@selector(popoverWillClose:)]; // Call delegate
 	if (self.animates) {
 		[_popoverWindow dismissAnimated];
@@ -127,7 +125,7 @@
 	NSRect contentRect = NSZeroRect;
 	contentRect.size = contentSize;
 	NSRect windowFrame = [_popoverWindow frameRectForContentRect:contentRect];
-	if (direction == INPopoverArrowDirectionUp) { 
+	if (direction == INPopoverArrowDirectionUp) {
 		CGFloat xOrigin = NSMidX(_screenRect) - floor(windowFrame.size.width / 2.0);
 		CGFloat yOrigin = NSMinY(_screenRect) - windowFrame.size.height;
 		windowFrame.origin = NSMakePoint(xOrigin, yOrigin);
@@ -148,14 +146,14 @@
 	return windowFrame;
 }
 
-- (void) animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
 {
 #pragma unused(animation)
 #pragma unused(flag)
 	// Detect the end of fade out and close the window
-	if(0.0 == [_popoverWindow alphaValue])
+	if (0.0 == [_popoverWindow alphaValue])
 		[self _closePopoverAndResetVariables];
-	else if(1.0 == [_popoverWindow alphaValue]) {
+	else if (1.0 == [_popoverWindow alphaValue]) {
 		[[_positionView window] addChildWindow:_popoverWindow ordered:NSWindowAbove];
 		[self _callDelegateMethod:@selector(popoverDidShow:)];
 	}
@@ -179,44 +177,89 @@
 #pragma mark -
 #pragma mark Getters
 
-- (NSColor *)color { return _popoverWindow.frameView.color; }
+- (NSColor *)color
+{
+	return _popoverWindow.frameView.color;
+}
 
-- (CGFloat)borderWidth { return _popoverWindow.frameView.borderWidth; }
+- (CGFloat)borderWidth
+{
+	return _popoverWindow.frameView.borderWidth;
+}
 
-- (NSColor *)borderColor { return _popoverWindow.frameView.borderColor; }
+- (NSColor *)borderColor
+{
+	return _popoverWindow.frameView.borderColor;
+}
 
-- (NSColor *)topHighlightColor { return _popoverWindow.frameView.topHighlightColor; }
+- (NSColor *)topHighlightColor
+{
+	return _popoverWindow.frameView.topHighlightColor;
+}
 
-- (CGFloat)cornerRadius { return _popoverWindow.frameView.cornerRadius; }
+- (CGFloat)cornerRadius
+{
+	return _popoverWindow.frameView.cornerRadius;
+}
 
-- (NSSize)arrowSize { return _popoverWindow.frameView.arrowSize; }
+- (NSSize)arrowSize
+{
+	return _popoverWindow.frameView.arrowSize;
+}
 
-- (INPopoverArrowDirection)arrowDirection { return _popoverWindow.frameView.arrowDirection; }
+- (INPopoverArrowDirection)arrowDirection
+{
+	return _popoverWindow.frameView.arrowDirection;
+}
 
-- (NSView *)contentView { return [_popoverWindow popoverContentView]; }
+- (NSView *)contentView
+{
+	return [_popoverWindow popoverContentView];
+}
 
-- (BOOL)popoverIsVisible { return [_popoverWindow isVisible]; }
+- (BOOL)popoverIsVisible
+{
+	return [_popoverWindow isVisible];
+}
 
 #pragma mark -
 #pragma mark Setters
 
-- (void)setColor:(NSColor *)newColor { _popoverWindow.frameView.color = newColor; }
+- (void)setColor:(NSColor *)newColor
+{
+	_popoverWindow.frameView.color = newColor;
+}
 
-- (void)setBorderWidth:(CGFloat)newBorderWidth { _popoverWindow.frameView.borderWidth = newBorderWidth; }
+- (void)setBorderWidth:(CGFloat)newBorderWidth
+{
+	_popoverWindow.frameView.borderWidth = newBorderWidth;
+}
 
-- (void)setBorderColor:(NSColor *)newBorderColor { _popoverWindow.frameView.borderColor = newBorderColor; }
+- (void)setBorderColor:(NSColor *)newBorderColor
+{
+	_popoverWindow.frameView.borderColor = newBorderColor;
+}
 
-- (void)setTopHighlightColor:(NSColor *)newTopHighlightColor { _popoverWindow.frameView.topHighlightColor = newTopHighlightColor; }
+- (void)setTopHighlightColor:(NSColor *)newTopHighlightColor
+{
+	_popoverWindow.frameView.topHighlightColor = newTopHighlightColor;
+}
 
-- (void)setCornerRadius:(CGFloat)cornerRadius { _popoverWindow.frameView.cornerRadius = cornerRadius; }
+- (void)setCornerRadius:(CGFloat)cornerRadius
+{
+	_popoverWindow.frameView.cornerRadius = cornerRadius;
+}
 
-- (void)setArrowSize:(NSSize)arrowSize { _popoverWindow.frameView.arrowSize = arrowSize; }
+- (void)setArrowSize:(NSSize)arrowSize
+{
+	_popoverWindow.frameView.arrowSize = arrowSize;
+}
 
 - (void)setContentViewController:(NSViewController *)newContentViewController
 {
 	if (_contentViewController != newContentViewController) {
 		[_popoverWindow setPopoverContentView:nil]; // Clear the content view
-        _contentViewController = newContentViewController;
+		_contentViewController = newContentViewController;
 		NSView *contentView = [_contentViewController view];
 		self.contentSize = [contentView frame].size;
 		[_popoverWindow setPopoverContentView:contentView];
@@ -233,7 +276,7 @@
 
 - (void)_setArrowDirection:(INPopoverArrowDirection)direction
 {
-	_popoverWindow.frameView.arrowDirection = direction; 
+	_popoverWindow.frameView.arrowDirection = direction;
 }
 
 #pragma mark -
@@ -244,7 +287,7 @@
 {
 	// Create an empty popover window
 	_popoverWindow = [[INPopoverWindow alloc] initWithContentRect:NSZeroRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
-	
+
 	// set defaults like iCal popover
 	self.color = [NSColor colorWithCalibratedWhite:0.94 alpha:0.92];
 	self.borderColor = [NSColor colorWithCalibratedWhite:1.0 alpha:0.92];
@@ -252,7 +295,7 @@
 	self.closesWhenPopoverResignsKey = YES;
 	self.closesWhenApplicationBecomesInactive = NO;
 	self.animates = YES;
-	
+
 	// create animation to get callback - delegate is set when opening popover to avoid memory cycles
 	CAAnimation *animation = [CABasicAnimation animation];
 	[_popoverWindow setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
@@ -346,9 +389,9 @@
 	_positionView = nil;
 	_screenRect = NSZeroRect;
 	_viewRect = NSZeroRect;
-    
-    // When using ARC and no animation, there is a "message sent to deallocated instance" crash if setDelegate: is not performed at the end of the event.
-    [[_popoverWindow animationForKey:@"alphaValue"] performSelector:@selector(setDelegate:) withObject:nil afterDelay:0];
+
+	// When using ARC and no animation, there is a "message sent to deallocated instance" crash if setDelegate: is not performed at the end of the event.
+	[[_popoverWindow animationForKey:@"alphaValue"] performSelector:@selector(setDelegate:) withObject:nil afterDelay:0];
 }
 
 - (void)_callDelegateMethod:(SEL)selector
