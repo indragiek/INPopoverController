@@ -9,41 +9,13 @@
 #import "INPopoverWindow.h"
 #import "INPopoverWindowFrame.h"
 #import "INPopoverParentWindow.h"
-
 #include <QuartzCore/QuartzCore.h>
 
-@interface INPopoverController ()
-- (void)_setInitialPropertyValues;
-- (void)_closePopoverAndResetVariables;
-- (void)_callDelegateMethod:(SEL)selector;
-- (void)_positionViewFrameChanged:(NSNotification*)notification;
-- (void)_setPositionView:(NSView*)newPositionView;
-- (void)_setArrowDirection:(INPopoverArrowDirection)direction;
-- (INPopoverArrowDirection)_arrowDirectionWithPreferredArrowDirection:(INPopoverArrowDirection)direction;
-@property (readonly) NSView *contentView;
-@end
-
 @implementation INPopoverController {
-#if __has_feature(objc_arc)
-	__unsafe_unretained id<INPopoverControllerDelegate> _delegate;
-#else
-    id<INPopoverControllerDelegate> _delegate;
-#endif
-	NSSize _contentSize;
-	BOOL _closesWhenPopoverResignsKey;
-	BOOL _closesWhenApplicationBecomesInactive;
-	BOOL _animates;
-	NSViewController *_contentViewController;
-	
 	INPopoverWindow *_popoverWindow;
-	NSView *_positionView;
 	NSRect _screenRect;
 	NSRect _viewRect;
 }
-@synthesize delegate = _delegate;
-@synthesize closesWhenPopoverResignsKey = _closesWhenPopoverResignsKey;
-@synthesize closesWhenApplicationBecomesInactive = _closesWhenApplicationBecomesInactive;
-@synthesize animates = _animates;
 
 #pragma mark -
 #pragma mark Initialization
@@ -65,7 +37,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (id)initWithContentViewController:(NSViewController*)viewController
+- (id)initWithContentViewController:(NSViewController* )viewController
 {
 	if ((self = [super init])) {
 		[self _setInitialPropertyValues];
@@ -74,7 +46,7 @@
 	return self;
 }
 
-- (void)presentPopoverFromRect:(NSRect)rect inView:(NSView*)positionView preferredArrowDirection:(INPopoverArrowDirection)direction anchorsToPositionView:(BOOL)anchors
+- (void)presentPopoverFromRect:(NSRect)rect inView:(NSView *)positionView preferredArrowDirection:(INPopoverArrowDirection)direction anchorsToPositionView:(BOOL)anchors
 {
 	if (self.popoverIsVisible) { return; } // If it's already visible, do nothing
 	NSWindow *mainWindow = [positionView window];
@@ -220,19 +192,18 @@
 
 #pragma mark -
 #pragma mark Getters
-@synthesize positionView=_positionView, contentSize=_contentSize, popoverWindow=_popoverWindow, contentViewController=_contentViewController;
 
-- (NSColor*)color { return _popoverWindow.frameView.color; }
+- (NSColor *)color { return _popoverWindow.frameView.color; }
 
 - (CGFloat)borderWidth { return _popoverWindow.frameView.borderWidth; }
 
-- (NSColor*)borderColor { return _popoverWindow.frameView.borderColor; }
+- (NSColor *)borderColor { return _popoverWindow.frameView.borderColor; }
 
-- (NSColor*)topHighlightColor { return _popoverWindow.frameView.topHighlightColor; }
+- (NSColor *)topHighlightColor { return _popoverWindow.frameView.topHighlightColor; }
 
 - (INPopoverArrowDirection)arrowDirection { return _popoverWindow.frameView.arrowDirection; }
 
-- (NSView*)contentView { return [_popoverWindow popoverContentView]; }
+- (NSView *)contentView { return [_popoverWindow popoverContentView]; }
 
 - (BOOL)popoverIsVisible { return [_popoverWindow isVisible]; }
 
@@ -273,7 +244,7 @@
 	
 #pragma mark -
 
-- (void)_setPositionView:(NSView*)newPositionView
+- (void)_setPositionView:(NSView *)newPositionView
 {
 #if __has_feature(objc_arc)
     _positionView = newPositionView;
@@ -371,7 +342,7 @@
 	return direction;
 }
 
-- (void)_positionViewFrameChanged:(NSNotification*)notification
+- (void)_positionViewFrameChanged:(NSNotification *)notification
 {
 	NSRect superviewBounds = [[self.positionView superview] bounds];
 	if (!(NSContainsRect(superviewBounds, [self.positionView frame]))) {

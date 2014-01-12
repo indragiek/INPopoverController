@@ -7,14 +7,7 @@
 
 #import "INPopoverWindowFrame.h"
 
-@interface INPopoverWindowFrame ()
-- (NSBezierPath*)_popoverBezierPathWithRect:(NSRect)aRect;
-@end
-
 @implementation INPopoverWindowFrame
-@synthesize color = _color, borderColor = _borderColor, topHighlightColor=_topHighlightColor;
-@synthesize borderWidth = _borderWidth;
-@synthesize arrowDirection = _arrowDirection;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -69,7 +62,7 @@
 #pragma mark -
 #pragma mark Private
 
-- (NSBezierPath*)_popoverBezierPathWithRect:(NSRect)aRect
+- (NSBezierPath *)_popoverBezierPathWithRect:(NSRect)aRect
 {
 	CGFloat radius = INPOPOVER_CORNER_RADIUS;
 	CGFloat inset = radius + INPOPOVER_ARROW_HEIGHT;

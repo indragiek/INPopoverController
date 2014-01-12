@@ -8,7 +8,6 @@
 #import "INPopoverParentWindow.h"
 #import "INPopoverWindow.h"
 
-
 @implementation INPopoverParentWindow
 
 - (BOOL)isKeyWindow

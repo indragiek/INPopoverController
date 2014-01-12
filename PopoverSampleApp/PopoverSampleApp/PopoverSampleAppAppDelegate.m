@@ -10,7 +10,6 @@
 #import <INPopoverController/INPopoverController.h>
 
 @implementation PopoverSampleAppAppDelegate
-
 @synthesize window, popoverController;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
