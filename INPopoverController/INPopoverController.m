@@ -78,8 +78,9 @@
 	// When -closesWhenPopoverResignsKey is set to YES, the popover will automatically close when the popover loses its key status
 	if (self.closesWhenPopoverResignsKey) {
 		[nc addObserver:self selector:@selector(closePopover:) name:NSWindowDidResignKeyNotification object:_popoverWindow];
-		if (!self.closesWhenApplicationBecomesInactive)
+		if (!self.closesWhenApplicationBecomesInactive) {
 			[nc addObserver:self selector:@selector(applicationDidBecomeActive:) name:NSApplicationDidBecomeActiveNotification object:nil];
+		}
 	} else if (self.closesWhenApplicationBecomesInactive) {
 		// this is only needed if closesWhenPopoverResignsKey is NO, otherwise we already get a "resign key" notification when resigning active
 		[nc addObserver:self selector:@selector(closePopover:) name:NSApplicationDidResignActiveNotification object:nil];

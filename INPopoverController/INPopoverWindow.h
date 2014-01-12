@@ -13,7 +13,7 @@
 @class INPopoverWindowFrame;
 @class INPopoverController;
 
-@interface INPopoverWindow : NSWindow
+@interface INPopoverWindow : NSPanel
 @property (nonatomic, readonly) INPopoverWindowFrame *frameView; // Equivalent to contentView
 @property (nonatomic, strong) NSView *popoverContentView;
 
