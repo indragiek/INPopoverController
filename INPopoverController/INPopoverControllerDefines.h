@@ -10,3 +10,10 @@ typedef NS_ENUM(NSRectEdge, INPopoverArrowDirection) {
 	INPopoverArrowDirectionUp = NSMaxYEdge,
 	INPopoverArrowDirectionDown = NSMinYEdge
 };
+
+typedef NS_ENUM(NSInteger, INPopoverAnimationType) {
+	INPopoverAnimationTypePop = 0,	// Pop animation similar to NSPopover
+	INPopoverAnimationTypeFadeIn,	// Fade in only, no fade out
+	INPopoverAnimationTypeFadeOut,	// Fade out only, no fade in
+	INPopoverAnimationTypeFadeInOut // Fade in and out
+};

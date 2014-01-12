@@ -90,29 +90,51 @@
 	[frameView addSubview:_popoverContentView];
 }
 
-- (void)presentWithPopoverController:(INPopoverController *)popoverController
+- (void)presentAnimated
 {
 	if ([self isVisible])
 		return;
+	
+	switch (self.popoverController.animationType) {
+		case INPopoverAnimationTypePop:
+			[self presentWithPopAnimation];
+			break;
+		case INPopoverAnimationTypeFadeIn:
+		case INPopoverAnimationTypeFadeInOut:
+			[self presentWithFadeAnimation];
+			break;
+		default:
+			break;
+	}
+}
 
+- (void)presentWithPopAnimation
+{
 	NSRect endFrame = [self frame];
-	NSRect startFrame = [popoverController popoverFrameWithSize:START_SIZE andArrowDirection:self.frameView.arrowDirection];
-	NSRect overshootFrame = [popoverController popoverFrameWithSize:NSMakeSize(endFrame.size.width * OVERSHOOT_FACTOR, endFrame.size.height * OVERSHOOT_FACTOR) andArrowDirection:self.frameView.arrowDirection];
-
+	NSRect startFrame = [self.popoverController popoverFrameWithSize:START_SIZE andArrowDirection:self.frameView.arrowDirection];
+	NSRect overshootFrame = [self.popoverController popoverFrameWithSize:NSMakeSize(endFrame.size.width * OVERSHOOT_FACTOR, endFrame.size.height * OVERSHOOT_FACTOR) andArrowDirection:self.frameView.arrowDirection];
+	
 	_zoomWindow = [self _zoomWindowWithRect:startFrame];
 	[_zoomWindow setAlphaValue:0.0];
 	[_zoomWindow orderFront:self];
-
+	
 	// configure bounce-out animation
 	CAKeyframeAnimation *anim = [CAKeyframeAnimation animation];
 	[anim setDelegate:self];
 	[anim setValues:[NSArray arrayWithObjects:[NSValue valueWithRect:startFrame], [NSValue valueWithRect:overshootFrame], [NSValue valueWithRect:endFrame], nil]];
 	[_zoomWindow setAnimations:[NSDictionary dictionaryWithObjectsAndKeys:anim, @"frame", nil]];
-
+	
 	[NSAnimationContext beginGrouping];
 	[[_zoomWindow animator] setAlphaValue:1.0];
 	[[_zoomWindow animator] setFrame:endFrame display:YES];
 	[NSAnimationContext endGrouping];
+}
+
+- (void)presentWithFadeAnimation
+{
+	[self setAlphaValue:0.0];
+	[self makeKeyAndOrderFront:nil];
+	[[self animator] setAlphaValue:1.0];
 }
 
 - (void)dismissAnimated
@@ -123,6 +145,7 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
+	[self setAlphaValue:1.0];
 	[self makeKeyAndOrderFront:self];
 	[_zoomWindow close];
 	_zoomWindow = nil;
