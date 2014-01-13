@@ -26,12 +26,15 @@
 	}
 
 	NSBezierPath *path = [self _popoverBezierPathWithRect:bounds];
-	[self.color set];
-	[path fill];
-
-	[path setLineWidth:self.borderWidth];
-	[self.borderColor set];
-	[path stroke];
+	if (self.color) {
+		[self.color set];
+		[path fill];
+	}
+	if (self.borderWidth > 0) {
+		[path setLineWidth:self.borderWidth];
+		[self.borderColor set];
+		[path stroke];
+	}
 
 	const CGFloat arrowWidth = self.arrowSize.width;
 	const CGFloat arrowHeight = self.arrowSize.height;
