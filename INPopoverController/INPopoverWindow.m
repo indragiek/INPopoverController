@@ -155,6 +155,11 @@
 	[[windowAnimation delegate] animationDidStop:anim finished:flag];
 }
 
+- (void)cancelOperation:(id)sender
+{
+	if (self.popoverController.closesWhenEscapeKeyPressed) [self.popoverController closePopover:nil];
+}
+
 #pragma mark -
 #pragma mark Private
 
