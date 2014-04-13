@@ -40,6 +40,9 @@
 /** The size of the content of the popover. This is automatically set to contentViewController's size when the view controller is set, but can be modified. Changes to this value are animated when animates is set to YES **/
 @property (nonatomic, assign) NSSize contentSize;
 
+/** Whether the popover closes when user presses escape key. Default value: YES */
+@property (nonatomic, assign) BOOL closesWhenEscapeKeyPressed;
+
 /** Whether the popover closes when the popover window resigns its key status. Default value: YES **/
 @property (nonatomic, assign) BOOL closesWhenPopoverResignsKey;
 

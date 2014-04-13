@@ -301,6 +301,7 @@
 	self.color = [NSColor colorWithCalibratedWhite:0.94 alpha:0.92];
 	self.borderColor = [NSColor colorWithCalibratedWhite:1.0 alpha:0.92];
 	self.borderWidth = 1.0;
+	self.closesWhenEscapeKeyPressed = YES;
 	self.closesWhenPopoverResignsKey = YES;
 	self.closesWhenApplicationBecomesInactive = NO;
 	self.animates = YES;
