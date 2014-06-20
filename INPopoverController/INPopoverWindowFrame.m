@@ -65,10 +65,11 @@
 	const CGFloat arrowHeight = self.arrowSize.height;
 	const CGFloat inset = radius + arrowHeight;
 	const NSRect drawingRect = NSInsetRect(aRect, inset, inset);
-	const CGFloat minX = NSMinX(drawingRect);
-	const CGFloat maxX = NSMaxX(drawingRect);
-	const CGFloat minY = NSMinY(drawingRect);
-	const CGFloat maxY = NSMaxY(drawingRect);
+	//Take into consideration the width of the border
+	const CGFloat minX = NSMinX(drawingRect) + (self.arrowDirection == INPopoverArrowDirectionLeft ? self.borderWidth / 2 : 0);
+	const CGFloat maxX = NSMaxX(drawingRect) - (self.arrowDirection == INPopoverArrowDirectionRight ? self.borderWidth / 2 : 0);
+	const CGFloat minY = NSMinY(drawingRect) + (self.arrowDirection == INPopoverArrowDirectionDown ? self.borderWidth / 2 : 0);
+	const CGFloat maxY = NSMaxY(drawingRect) - (self.arrowDirection == INPopoverArrowDirectionUp ? self.borderWidth / 2 : 0);
 
 	NSBezierPath *path = [NSBezierPath bezierPath];
 	[path setLineJoinStyle:NSRoundLineJoinStyle];
