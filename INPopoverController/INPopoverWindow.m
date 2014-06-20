@@ -87,7 +87,36 @@
 	_popoverContentView = aView;
 	[_popoverContentView setFrame:[self contentRectForFrameRect:bounds]];
 	[_popoverContentView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+	[self updateContentViewOrigin];
 	[frameView addSubview:_popoverContentView];
+}
+
+- (void) updateContentViewOrigin
+{
+	if(_popoverContentView == nil || self.popoverController == nil || !self.popoverController.borderWidth)	return;
+	
+	NSPoint point = [self contentRectForFrameRect:self.frame].origin;
+	
+	switch (self.popoverController.arrowDirection)
+	{
+		case INPopoverArrowDirectionLeft:
+			point.x -= self.popoverController.borderWidth / 2;
+			break;
+			
+		case INPopoverArrowDirectionRight:
+			point.x += self.popoverController.borderWidth / 2;
+			break;
+
+		case INPopoverArrowDirectionDown:
+			point.y += self.popoverController.borderWidth / 2;
+			break;
+			
+		case INPopoverArrowDirectionUp:
+			point.y -= self.popoverController.borderWidth / 2;
+			break;
+	}
+
+	[_popoverContentView setFrameOrigin:point];
 }
 
 - (void)presentAnimated
