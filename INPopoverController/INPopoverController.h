@@ -140,7 +140,7 @@
 - (void)popoverWillClose:(INPopoverController *)popover;
 
 /**
- Invoked right before the popover closes
+ Invoked right after the popover closes
  @param popover the @class INPopoverController object that is controlling the popover
  */
 - (void)popoverDidClose:(INPopoverController *)popover;
