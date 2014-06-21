@@ -35,13 +35,13 @@
 - (NSRect)contentRectForFrameRect:(NSRect)windowFrame
 {
 	windowFrame.origin = NSZeroPoint;
-	const CGFloat arrowHeight = self.frameView.arrowSize.height + self.frameView.borderWidth;
+	const CGFloat arrowHeight = self.frameView.arrowSize.height + self.frameView.borderWidth / 2;
 	return NSInsetRect(windowFrame, arrowHeight, arrowHeight);
 }
 
 - (NSRect)frameRectForContentRect:(NSRect)contentRect
 {
-	const CGFloat arrowHeight = self.frameView.arrowSize.height + self.frameView.borderWidth;
+	const CGFloat arrowHeight = self.frameView.arrowSize.height + self.frameView.borderWidth / 2;
 	return NSInsetRect(contentRect, -arrowHeight, -arrowHeight);
 }
 
@@ -97,7 +97,7 @@
 	NSRect prevFrame = _popoverContentView.frame, frame = NSZeroRect;
 	
 	frame.size.height = prevFrame.size.height + 2 * inset + self.frameView.arrowSize.height;
-	frame.size.width = prevFrame.size.width + 2 * inset + self.frameView.arrowSize.width;
+	frame.size.width = prevFrame.size.width + 2 * inset + self.frameView.arrowSize.height;
 	
 	[self setFrame:frame display:NO];
 }
