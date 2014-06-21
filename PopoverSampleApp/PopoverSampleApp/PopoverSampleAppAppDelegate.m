@@ -13,6 +13,8 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     ContentViewController *viewController = [[ContentViewController alloc] initWithNibName:@"ContentViewController" bundle:nil];
+	viewController.view.wantsLayer = YES;
+	viewController.view.layer.backgroundColor = [NSColor redColor].CGColor;
     self.popoverController = [[INPopoverController alloc] initWithContentViewController:viewController];
 }
 
@@ -21,7 +23,7 @@
     if (self.popoverController.popoverIsVisible) {
         [self.popoverController closePopover:nil];
     } else {
-        [self.popoverController presentPopoverFromRect:[sender bounds] inView:sender preferredArrowDirection:INPopoverArrowDirectionLeft anchorsToPositionView:YES];
+        [self.popoverController presentPopoverFromRect:[sender bounds] inView:sender preferredArrowDirection:INPopoverArrowDirectionUp anchorsToPositionView:YES];
     }
 }
 
