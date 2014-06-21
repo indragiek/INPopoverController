@@ -91,50 +91,6 @@
 	[frameView addSubview:_popoverContentView];
 }
 
-- (void) updateWindowSize
-{
-	CGFloat inset = self.frameView.cornerRadius + self.frameView.borderWidth;
-	NSRect frame = NSZeroRect;
-	
-	frame.size.height = _popoverContentView.frame.size.height + 2 * inset + self.frameView.arrowSize.height;
-	frame.size.width = _popoverContentView.frame.size.width + 2 * inset + self.frameView.arrowSize.height;
-	
-	[self setFrame:frame display:NO];
-	
-	frame = _popoverContentView.frame;
-	inset -= self.frameView.borderWidth / 2;
-	frame.size.height -= inset;	frame.size.width -= inset;
-	[_popoverContentView setFrameSize:frame.size];
-}
-
-- (void) updateContentViewOrigin
-{
-	if(_popoverContentView == nil || self.popoverController == nil || !self.popoverController.borderWidth)	return;
-	
-	NSPoint point = [self contentRectForFrameRect:self.frame].origin;
-	
-	switch (self.popoverController.arrowDirection)
-	{
-		case INPopoverArrowDirectionLeft:
-			point.x -= self.popoverController.borderWidth / 2;
-			break;
-			
-		case INPopoverArrowDirectionRight:
-			point.x += self.popoverController.borderWidth / 2;
-			break;
-
-		case INPopoverArrowDirectionDown:
-			point.y += self.popoverController.borderWidth / 2;
-			break;
-			
-		case INPopoverArrowDirectionUp:
-			point.y -= self.popoverController.borderWidth / 2;
-			break;
-	}
-
-	[_popoverContentView setFrameOrigin:point];
-}
-
 - (void)presentAnimated
 {
 	if ([self isVisible])
@@ -203,6 +159,56 @@
 - (void)cancelOperation:(id)sender
 {
 	if (self.popoverController.closesWhenEscapeKeyPressed) [self.popoverController closePopover:nil];
+}
+
+#pragma mark - Handle resizing when border width change
+
+//We update window size to handle the increased border width
+- (void) updateWindowSize
+{
+	CGFloat inset = self.frameView.cornerRadius + self.frameView.borderWidth + self.frameView.arrowSize.height / 2;	//border around, the arrow must only is considered once
+	NSRect frame = NSZeroRect;
+	
+	frame.size.height = _popoverContentView.frame.size.height + 2 * inset;
+	frame.size.width = _popoverContentView.frame.size.width + 2 * inset;
+	
+	[self setFrame:frame display:NO];
+	
+	//The internal view (the payload) got resized, resize it again to get it to fit in our new window
+	frame = _popoverContentView.frame;
+	inset = self.frameView.cornerRadius + self.frameView.borderWidth / 2;
+	frame.size.height -= inset;	frame.size.width -= inset;
+	[_popoverContentView setFrameSize:frame.size];
+}
+
+//We move the origin of the content view, whenever arrow or border width change
+- (void) updateContentViewOrigin
+{
+	if(_popoverContentView == nil || self.popoverController == nil || !self.popoverController.borderWidth)	return;
+	
+	NSPoint point = [self contentRectForFrameRect:self.frame].origin;
+	
+	//Half the border overlap on us
+	switch (self.popoverController.arrowDirection)
+	{
+		case INPopoverArrowDirectionLeft:
+			point.x -= self.popoverController.borderWidth / 2;
+			break;
+			
+		case INPopoverArrowDirectionRight:
+			point.x += self.popoverController.borderWidth / 2;
+			break;
+			
+		case INPopoverArrowDirectionUp:
+			point.y -= self.popoverController.borderWidth / 2;
+			break;
+			
+		case INPopoverArrowDirectionDown:
+			point.y += self.popoverController.borderWidth / 2;
+			break;
+	}
+	
+	[_popoverContentView setFrameOrigin:point];
 }
 
 #pragma mark -
