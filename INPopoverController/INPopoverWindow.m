@@ -93,13 +93,18 @@
 
 - (void) updateWindowSize
 {
-	const CGFloat inset = self.frameView.cornerRadius + self.frameView.borderWidth;
-	NSRect prevFrame = _popoverContentView.frame, frame = NSZeroRect;
+	CGFloat inset = self.frameView.cornerRadius + self.frameView.borderWidth;
+	NSRect frame = NSZeroRect;
 	
-	frame.size.height = prevFrame.size.height + 2 * inset + self.frameView.arrowSize.height;
-	frame.size.width = prevFrame.size.width + 2 * inset + self.frameView.arrowSize.height;
+	frame.size.height = _popoverContentView.frame.size.height + 2 * inset + self.frameView.arrowSize.height;
+	frame.size.width = _popoverContentView.frame.size.width + 2 * inset + self.frameView.arrowSize.height;
 	
 	[self setFrame:frame display:NO];
+	
+	frame = _popoverContentView.frame;
+	inset -= self.frameView.borderWidth / 2;
+	frame.size.height -= inset;	frame.size.width -= inset;
+	[_popoverContentView setFrameSize:frame.size];
 }
 
 - (void) updateContentViewOrigin
