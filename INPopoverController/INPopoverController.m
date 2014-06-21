@@ -241,6 +241,8 @@
 - (void)setBorderWidth:(CGFloat)newBorderWidth
 {
 	_popoverWindow.frameView.borderWidth = newBorderWidth;
+	[_popoverWindow updateWindowSize];
+	[_popoverWindow updateContentViewOrigin];
 }
 
 - (void)setBorderColor:(NSColor *)newBorderColor
@@ -285,6 +287,7 @@
 - (void)_setArrowDirection:(INPopoverArrowDirection)direction
 {
 	_popoverWindow.frameView.arrowDirection = direction;
+	[_popoverWindow updateContentViewOrigin];
 }
 
 #pragma mark -

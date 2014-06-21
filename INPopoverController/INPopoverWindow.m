@@ -91,6 +91,15 @@
 	[frameView addSubview:_popoverContentView];
 }
 
+- (void) updateWindowSize
+{
+	const CGFloat inset = self.frameView.cornerRadius + self.frameView.arrowSize.height + self.frameView.borderWidth;
+	const NSRect frame = NSInsetRect(_popoverContentView.frame, inset, inset);
+	
+	[self setFrame:frame display:NO];
+	[self.contentView setFrameSize:frame.size];
+}
+
 - (void) updateContentViewOrigin
 {
 	if(_popoverContentView == nil || self.popoverController == nil || !self.popoverController.borderWidth)	return;
