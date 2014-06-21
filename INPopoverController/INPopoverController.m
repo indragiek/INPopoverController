@@ -240,8 +240,9 @@
 
 - (void)setBorderWidth:(CGFloat)newBorderWidth
 {
+	CGFloat prevValue = _popoverWindow.frameView.borderWidth;
 	_popoverWindow.frameView.borderWidth = newBorderWidth;
-	[_popoverWindow updateWindowSize];
+	[_popoverWindow updateWindowSize : prevValue];
 	[_popoverWindow updateContentViewOrigin];
 }
 

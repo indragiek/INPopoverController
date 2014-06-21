@@ -164,9 +164,9 @@
 #pragma mark - Handle resizing when border width change
 
 //We update window size to handle the increased border width
-- (void) updateWindowSize
+- (void) updateWindowSize : (CGFloat) previousWidth
 {
-	CGFloat inset = self.frameView.cornerRadius + self.frameView.borderWidth + self.frameView.arrowSize.height / 2;	//border around, the arrow must only is considered once
+	CGFloat inset = self.frameView.cornerRadius + self.frameView.borderWidth - previousWidth + self.frameView.arrowSize.height / 2;	//border around, the arrow must only is considered once
 	NSRect frame = NSZeroRect;
 	
 	frame.size.height = _popoverContentView.frame.size.height + 2 * inset;
@@ -176,7 +176,7 @@
 	
 	//The internal view (the payload) got resized, resize it again to get it to fit in our new window
 	frame = _popoverContentView.frame;
-	inset = self.frameView.cornerRadius + self.frameView.borderWidth / 2;
+	inset = self.frameView.cornerRadius + (self.frameView.borderWidth - previousWidth) / 2;
 	frame.size.height -= inset;	frame.size.width -= inset;
 	[_popoverContentView setFrameSize:frame.size];
 }
