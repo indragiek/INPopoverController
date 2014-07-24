@@ -25,13 +25,26 @@
 		bounds = NSInsetRect(bounds, 0.5, 0.5);
 	}
 
-	NSBezierPath *path = [self _popoverBezierPathWithRect:bounds];
-	if (self.color) {
-		[self.color set];
-		[path fill];
+	NSBezierPath *path = [self _popoverBezierPathWithRect:bounds], *inside;
+	
+	if([self.color isEqualTo:self.borderColor])	//prevent to redraw over the previous colored area, important if alpha channel used!
+	{
+		NSUInteger offset = ceil(self.borderWidth / 2.0f);
+		inside = [self _popoverBezierPathWithRect: NSMakeRect(offset, offset, bounds.size.width - 2 * offset, bounds.size.height - 2 * offset)];
 	}
-	if (self.borderWidth > 0) {
+	else
+		inside = path;
+	
+	if (self.color)
+	{
+		[self.color set];
+		[inside fill];
+	}
+	
+	if (self.borderWidth > 0)
+	{
 		[path setLineWidth:self.borderWidth];
+		
 		[self.borderColor set];
 		[path stroke];
 	}
@@ -60,15 +73,16 @@
 
 - (NSBezierPath *)_popoverBezierPathWithRect:(NSRect)aRect
 {
-	const CGFloat radius = self.cornerRadius;
+	const CGFloat radius = self.cornerRadius, border = floor(self.borderWidth / 2.0f);
 	const CGFloat arrowWidth = self.arrowSize.width;
 	const CGFloat arrowHeight = self.arrowSize.height;
-	const CGFloat inset = radius + arrowHeight;
+	const CGFloat inset = radius + arrowHeight + ceil(self.borderWidth / 2.0f);
 	const NSRect drawingRect = NSInsetRect(aRect, inset, inset);
-	const CGFloat minX = NSMinX(drawingRect);
-	const CGFloat maxX = NSMaxX(drawingRect);
-	const CGFloat minY = NSMinY(drawingRect);
-	const CGFloat maxY = NSMaxY(drawingRect);
+	
+	const CGFloat minX = NSMinX(drawingRect) - ((self.arrowDirection == INPopoverArrowDirectionUp || self.arrowDirection == INPopoverArrowDirectionDown) ? border : 0);
+	const CGFloat maxX = NSMaxX(drawingRect) - ((self.arrowDirection == INPopoverArrowDirectionUp || self.arrowDirection == INPopoverArrowDirectionDown) ? border : 0);
+	const CGFloat minY = NSMinY(drawingRect) - ((self.arrowDirection == INPopoverArrowDirectionRight || self.arrowDirection == INPopoverArrowDirectionLeft) ? border : 0);
+	const CGFloat maxY = NSMaxY(drawingRect) - ((self.arrowDirection == INPopoverArrowDirectionRight || self.arrowDirection == INPopoverArrowDirectionLeft) ? border : 0);
 
 	NSBezierPath *path = [NSBezierPath bezierPath];
 	[path setLineJoinStyle:NSRoundLineJoinStyle];

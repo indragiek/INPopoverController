@@ -18,6 +18,9 @@
 @property (nonatomic, assign) INPopoverController *popoverController;
 @property (nonatomic, strong) NSView *popoverContentView;
 
+- (void) updateWindowSize;
+- (void) updateContentViewOrigin;
+
 - (void)presentAnimated;
 - (void)dismissAnimated;
 

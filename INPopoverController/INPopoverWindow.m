@@ -35,13 +35,13 @@
 - (NSRect)contentRectForFrameRect:(NSRect)windowFrame
 {
 	windowFrame.origin = NSZeroPoint;
-	const CGFloat arrowHeight = self.frameView.arrowSize.height;
+	const CGFloat arrowHeight = self.frameView.arrowSize.height + self.frameView.cornerRadius;
 	return NSInsetRect(windowFrame, arrowHeight, arrowHeight);
 }
 
 - (NSRect)frameRectForContentRect:(NSRect)contentRect
 {
-	const CGFloat arrowHeight = self.frameView.arrowSize.height;
+	const CGFloat arrowHeight = self.frameView.arrowSize.height + self.frameView.borderWidth;
 	return NSInsetRect(contentRect, -arrowHeight, -arrowHeight);
 }
 
@@ -75,7 +75,7 @@
 {
 	if ([_popoverContentView isEqualTo:aView]) {return;}
 	NSRect bounds = [self frame];
-	bounds.origin = NSZeroPoint;
+	
 	INPopoverWindowFrame *frameView = [self frameView];
 	if (!frameView) {
 		frameView = [[INPopoverWindowFrame alloc] initWithFrame:bounds];
@@ -85,9 +85,49 @@
 		[_popoverContentView removeFromSuperview];
 	}
 	_popoverContentView = aView;
+	
 	[_popoverContentView setFrame:[self contentRectForFrameRect:bounds]];
 	[_popoverContentView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+	[self updateContentViewOrigin];
 	[frameView addSubview:_popoverContentView];
+}
+
+- (void) updateWindowSize
+{
+	const CGFloat inset = self.frameView.cornerRadius + self.frameView.arrowSize.height + 2 * self.frameView.borderWidth;
+	const NSRect frame = NSInsetRect(_popoverContentView.frame, inset, inset);
+	
+	[self setFrame:frame display:NO];
+	[self.contentView setFrameSize:frame.size];
+}
+
+- (void) updateContentViewOrigin
+{
+	if(_popoverContentView == nil || self.popoverController == nil || !self.popoverController.borderWidth)	return;
+	
+	NSPoint point = [self contentRectForFrameRect:self.frame].origin;
+	const CGFloat width = ceil(self.popoverController.borderWidth / 2.0f);
+	
+	switch (self.popoverController.arrowDirection)
+	{
+		case INPopoverArrowDirectionLeft:
+			point.y -= width;
+			break;
+			
+		case INPopoverArrowDirectionRight:
+			point.y -= width;
+			break;
+			
+		case INPopoverArrowDirectionDown:
+			point.x -= width;
+			break;
+			
+		case INPopoverArrowDirectionUp:
+			point.x -= width;
+			break;
+	}
+	
+	[_popoverContentView setFrameOrigin:point];
 }
 
 - (void)presentAnimated
