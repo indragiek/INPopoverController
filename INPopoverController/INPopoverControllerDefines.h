@@ -3,7 +3,7 @@
 //  Copyright 2011-2014 Indragie Karunaratne. All rights reserved.
 //
 
-typedef NS_ENUM(NSRectEdge, INPopoverArrowDirection) {
+typedef NS_ENUM(NSUInteger, INPopoverArrowDirection) {
 	INPopoverArrowDirectionUndefined = 0,
 	INPopoverArrowDirectionLeft = NSMaxXEdge,
 	INPopoverArrowDirectionRight = NSMinXEdge,
