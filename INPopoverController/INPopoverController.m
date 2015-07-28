@@ -58,15 +58,16 @@
 	NSWindow *mainWindow = [positionView window];
 	_positionView = positionView;
 	_viewRect = rect;
-	_screenRect = [positionView convertRect:rect toView:nil]; // Convert the rect to window coordinates
-	_screenRect.origin = [mainWindow convertBaseToScreen:_screenRect.origin]; // Convert window coordinates to screen coordinates
+
+	// Convert the rect to window coordinates, then convert window coordinates to screen coordinates
+	_screenRect = [mainWindow convertRectToScreen:[positionView convertRect:rect toView:nil]];
 	
 	INPopoverArrowDirection calculatedDirection = [self _arrowDirectionWithPreferredArrowDirection:direction]; // Calculate the best arrow direction
 	[self _setArrowDirection:calculatedDirection]; // Change the arrow direction of the popover
 	
 	NSRect windowFrame = [self popoverFrameWithSize:self.contentSize andArrowDirection:calculatedDirection]; // Calculate the window frame based on the arrow direction
 	[_popoverWindow setFrame:windowFrame display:YES]; // Se the frame of the window
-	[[_popoverWindow animationForKey:@"alphaValue"] setDelegate:self];
+	[(CAAnimation *) [_popoverWindow animationForKey:@"alphaValue"] setDelegate:self];
 
 	// Show the popover
 	[self _callDelegateMethod:@selector(popoverWillShow:)]; // Call the delegate
@@ -321,6 +322,8 @@
 	self.closesWhenEscapeKeyPressed = YES;
 	self.closesWhenPopoverResignsKey = YES;
 	self.closesWhenApplicationBecomesInactive = NO;
+	self.closeWhenAnchorMoveOffScreen = YES;
+	self.overrideAnchorFrameUpdate = NO;
 	self.animates = YES;
 	self.animationType = INPopoverAnimationTypePop;
 
@@ -391,17 +394,25 @@
 
 - (void)_positionViewFrameChanged:(NSNotification *)notification
 {
-	NSRect superviewBounds = [[self.positionView superview] bounds];
-	if (!(NSContainsRect(superviewBounds, [self.positionView frame]))) {
-		[self forceClosePopover:nil]; // If the position view goes off screen then close the popover
-		return;
+	if(self.closeWhenAnchorMoveOffScreen)
+	{
+		NSRect superviewBounds = [[self.positionView superview] bounds];
+		if (!(NSContainsRect(superviewBounds, [self.positionView frame]))) {
+			[self forceClosePopover:nil]; // If the position view goes off screen then close the popover
+			return;
+		}
 	}
-	NSRect newFrame = [_popoverWindow frame];
-	_screenRect = [self.positionView convertRect:_viewRect toView:nil]; // Convert the rect to window coordinates
-	_screenRect.origin = [[self.positionView window] convertBaseToScreen:_screenRect.origin]; // Convert window coordinates to screen coordinates
-	NSRect calculatedFrame = [self popoverFrameWithSize:self.contentSize andArrowDirection:self.arrowDirection]; // Calculate the window frame based on the arrow direction
-	newFrame.origin = calculatedFrame.origin;
-	[_popoverWindow setFrame:newFrame display:YES animate:NO]; // Set the frame of the window
+	
+	if(!self.overrideAnchorFrameUpdate)
+	{
+		NSRect newFrame = [_popoverWindow frame];
+
+		// Convert the rect to window coordinates, then convert window coordinates to screen coordinates
+		_screenRect = [[self.positionView window] convertRectToScreen:[self.positionView convertRect:_viewRect toView:nil]];
+		NSRect calculatedFrame = [self popoverFrameWithSize:self.contentSize andArrowDirection:self.arrowDirection]; // Calculate the window frame based on the arrow direction
+		newFrame.origin = calculatedFrame.origin;
+		[_popoverWindow setFrame:newFrame display:YES animate:NO]; // Set the frame of the window
+	}
 }
 
 - (void)_closePopoverAndResetVariables
@@ -424,7 +435,8 @@
 
 - (void)_callDelegateMethod:(SEL)selector
 {
-	if ([self.delegate respondsToSelector:selector]) {
+	if ([self.delegate respondsToSelector:selector])
+	{
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 		[self.delegate performSelector:selector withObject:self];
