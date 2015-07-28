@@ -49,6 +49,12 @@
 /** Whether the popover closes when the application becomes inactive. Default value: NO **/
 @property (nonatomic, assign) BOOL closesWhenApplicationBecomesInactive;
 
+/** Whether the popover closes when the view to which the popover is anchored to move off window. Default value: YES **/
+@property (nonatomic, assign) BOOL closeWhenAnchorMoveOffScreen;
+
+/** Whether the popover's anchor resize, should we update our frame ourselves. Default value: NO **/
+@property (nonatomic, assign) BOOL overrideAnchorFrameUpdate;
+
 /** Enable or disable animation when showing/closing the popover and changing the content size. Default value: YES */
 @property (nonatomic, assign) BOOL animates;
 
@@ -116,32 +122,32 @@
 @optional
 /**
  When the -closePopover: method is invoked, this method is called to give a change for the delegate to prevent it from closing. Returning NO for this delegate method will prevent the popover being closed. This delegate method does not apply to the -forceClosePopover: method, which will close the popover regardless of what the delegate returns.
- @param popover the @class INPopoverController object that is controlling the popover
+ @param popover the class INPopoverController object that is controlling the popover
  @returns whether the popover should close or not
  */
 - (BOOL)popoverShouldClose:(INPopoverController *)popover;
 
 /**
  Invoked right before the popover shows on screen
- @param popover the @class INPopoverController object that is controlling the popover
+ @param popover the class INPopoverController object that is controlling the popover
  */
 - (void)popoverWillShow:(INPopoverController *)popover;
 
 /**
  Invoked right after the popover shows on screen
- @param popover the @class INPopoverController object that is controlling the popover
+ @param popover the class INPopoverController object that is controlling the popover
  */
 - (void)popoverDidShow:(INPopoverController *)popover;
 
 /**
  Invoked right before the popover closes
- @param popover the @class INPopoverController object that is controlling the popover
+ @param popover the class INPopoverController object that is controlling the popover
  */
 - (void)popoverWillClose:(INPopoverController *)popover;
 
 /**
  Invoked right after the popover closes
- @param popover the @class INPopoverController object that is controlling the popover
+ @param popover the class INPopoverController object that is controlling the popover
  */
 - (void)popoverDidClose:(INPopoverController *)popover;
 @end
