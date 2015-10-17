@@ -18,4 +18,5 @@
 @property (nonatomic, assign) CGFloat cornerRadius;
 @property (nonatomic, assign) NSSize arrowSize;
 @property (nonatomic, assign) INPopoverArrowDirection arrowDirection;
+@property (nonatomic, assign) CGFloat arrowOffset;
 @end

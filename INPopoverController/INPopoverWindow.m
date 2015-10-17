@@ -75,6 +75,7 @@
 {
 	if ([_popoverContentView isEqualTo:aView]) {return;}
 	NSRect bounds = [self frame];
+	bounds.origin = NSZeroPoint;
 	
 	INPopoverWindowFrame *frameView = [self frameView];
 	if (!frameView) {
@@ -237,12 +238,11 @@
 	[zoomWindow setLevel:[self level]];
 	[zoomWindow setOpaque:NO];
 	[zoomWindow setReleasedWhenClosed:NO];
-	[zoomWindow useOptimizedDrawing:YES];
 
 	NSImageView *imageView = [[NSImageView alloc] initWithFrame:[zoomWindow contentRectForFrameRect:frame]];
 	[imageView setImage:image];
 	[imageView setImageFrameStyle:NSImageFrameNone];
-	[imageView setImageScaling:NSScaleToFit];
+	[imageView setImageScaling:NSImageScaleAxesIndependently];
 	[imageView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
 	[zoomWindow setContentView:imageView];
