@@ -130,36 +130,42 @@
 	}
 }
 
-- (CGFloat)fittingXOffsetForViewFrame:(CGRect)windowFrame inScreenFrame:(CGRect)screenFrame {
+- (CGFloat)fittingXOffsetForViewFrame:(CGRect)windowFrame inScreenFrame:(CGRect)screenFrame
+{
 	CGFloat xOrigin = windowFrame.origin.x;
 
 	CGFloat offset = 0;
 	if (xOrigin < 0) {
 		offset = xOrigin * -1;
 	}
-	else if (xOrigin + windowFrame.size.width > screenFrame.size.width) {
+	else if (xOrigin + windowFrame.size.width > screenFrame.size.width)
+	{
 		offset = ((xOrigin + windowFrame.size.width) - screenFrame.size.width) * -1;
 	}
 
-	if (ABS(offset) >= (windowFrame.size.width * 0.5 - self.arrowSize.height - self.arrowSize.width) ) {
+	if (ABS(offset) >= (windowFrame.size.width * 0.5 - self.arrowSize.height - self.arrowSize.width))
+	{
 		offset = 0;
 	}
 
 	return offset;
 }
 
-- (CGFloat)fittingYOffsetForViewFrame:(CGRect)windowFrame inScreenFrame:(CGRect)screenFrame {
+- (CGFloat)fittingYOffsetForViewFrame:(CGRect)windowFrame inScreenFrame:(CGRect)screenFrame
+{
 	CGFloat yOrigin = windowFrame.origin.y;
 
 	CGFloat offset = 0;
 	if (yOrigin < 0) {
 		offset = yOrigin * -1;
 	}
-	else if (yOrigin + windowFrame.size.height > screenFrame.size.height) {
+	else if (yOrigin + windowFrame.size.height > screenFrame.size.height)
+	{
 		offset = ((yOrigin + windowFrame.size.height) - screenFrame.size.height) * -1;
 	}
 
-	if (ABS(offset) >= (windowFrame.size.height * 0.5 - self.arrowSize.height * 2) ) {
+	if (ABS(offset) >= (windowFrame.size.height * 0.5 - self.arrowSize.height * 2))
+	{
 		offset = 0;
 	}
 
