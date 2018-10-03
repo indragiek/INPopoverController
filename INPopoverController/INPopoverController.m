@@ -123,7 +123,7 @@
 	if (self.animates && self.animationType != INPopoverAnimationTypeFadeIn) {
 		[_popoverWindow dismissAnimated];
 	} else {
-		[self _closePopoverAndResetVariables];
+        [self _closePopoverAndResetVariables: NO];
 	}
 }
 
@@ -160,7 +160,7 @@
 #pragma unused(flag)
 	// Detect the end of fade out and close the window
 	if (0.0 == [_popoverWindow alphaValue])
-		[self _closePopoverAndResetVariables];
+        [self _closePopoverAndResetVariables: YES];
 	else if (1.0 == [_popoverWindow alphaValue]) {
 		[[_positionView window] addChildWindow:_popoverWindow ordered:NSWindowAbove];
 		[self _callDelegateMethod:@selector(popoverDidShow:)];
@@ -387,7 +387,7 @@
 	[_popoverWindow setFrame:newFrame display:YES animate:NO]; // Set the frame of the window
 }
 
-- (void)_closePopoverAndResetVariables
+- (void)_closePopoverAndResetVariables:(BOOL)fromAnimation
 {
 	NSWindow *positionWindow = [self.positionView window];
 	[_popoverWindow orderOut:nil]; // Close the window 
@@ -402,7 +402,11 @@
 	_viewRect = NSZeroRect;
 
 	// When using ARC and no animation, there is a "message sent to deallocated instance" crash if setDelegate: is not performed at the end of the event.
-	[[_popoverWindow animationForKey:@"alphaValue"] performSelector:@selector(setDelegate:) withObject:nil afterDelay:0];
+    if (fromAnimation) {
+        [[_popoverWindow animationForKey:@"alphaValue"] setDelegate: nil];
+    } else {
+        [[_popoverWindow animationForKey:@"alphaValue"] performSelector:@selector(setDelegate:) withObject:nil afterDelay:0];
+    }
 }
 
 - (void)_callDelegateMethod:(SEL)selector
